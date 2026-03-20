@@ -147,7 +147,7 @@ class PresentationShellTests(unittest.TestCase):
         required = [
             "So... you're interested, but you're not sure where to begin.",
             "Sigh List",
-            "What in your life or work makes you sigh?",
+            "What in your life or work makes you sigh",
             "exam questions uploaded into Canvas",
             "chemical diagrams",
             "learning objects",
