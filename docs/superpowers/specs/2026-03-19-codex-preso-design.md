@@ -8,7 +8,7 @@ Output target: single-file Reveal.js presentation at `index.html`
 
 Create a Cedarville University branded Reveal.js presentation that introduces Codex to faculty and staff in a campus-wide setting where most attendees are familiar with ChatGPT but not Codex. The talk should run about 50 minutes, use a provocative and funny voice, remain accessible to non-programmers, and convert attendees into workshop participants who bring a laptop and a real problem to solve.
 
-The presentation should frame Codex as a "personal programmer" rather than a coding tool for software professionals. It should start with a sharp thesis, answer the "I do not code" objection quickly, prove the value with a concrete app story and prompt-to-output example, expand into campus-relevant use cases, hand off cleanly to Dr. John Delano for a separate live demo, and close with a practical call to action built around the "sigh list" exercise and workshop attendance.
+The presentation should frame Codex primarily as a way to build practical tools and workflows, not as a coding product for software professionals. The core conceptual distinction is between one-off LLM output and a durable tool that can be created with LLM help, then run independently, repeatably, and auditably after it exists. The deck should start with a sharp thesis, answer the "I do not code" objection quickly, prove the value with a concrete app story and prompt-to-output example, explain the difference between generated output and generated tools, expand into campus-relevant use cases, hand off cleanly to Dr. John Delano for a separate live demo, and close with a practical call to action built around the "sigh list" exercise and workshop attendance.
 
 ## Audience And Context
 
@@ -20,12 +20,13 @@ The presentation should frame Codex as a "personal programmer" rather than a cod
 
 ## Primary Goals
 
-1. Reframe Codex from "coding tool" to "plain-English personal programmer."
+1. Reframe Codex from "coding tool" to a practical way to build useful tools in plain English.
 2. Make non-programmers feel that Codex is relevant to their actual work.
-3. Show at least one credible story where Codex produced useful software quickly.
-4. Surface campus-relevant categories of problems that faculty and staff could solve.
-5. Convert attendees into workshop participants.
-6. Encourage attendees to begin a "sigh list" before the workshop.
+3. Show at least one credible story where Codex produced a useful tool quickly.
+4. Explain the difference between a one-off LLM answer and a repeatable, auditable tool.
+5. Surface campus-relevant categories of problems that faculty and staff could solve.
+6. Convert attendees into workshop participants.
+7. Encourage attendees to begin a "sigh list" before the workshop.
 
 ## Call To Action
 
@@ -48,6 +49,12 @@ The deck should preserve the presenter's voice:
 - Non-technical in wording, even when describing technical capability
 
 The tone should not become generic institutional marketing. It should still feel appropriate for a broad campus audience, but the opener should have some edge. Every sharp line should be followed by enough evidence or explanation to earn it.
+
+Terminology should reinforce the real message:
+
+- Prefer `tools`, `workflows`, `systems`, and `software that runs on its own`
+- Use `programmer` or `programming` sparingly, mainly in the audience objection and at most one additional rhetorical moment
+- Explicitly teach that the goal is not merely "AI made something for me once" but "I now have a tool I can run again, inspect, and trust"
 
 ## Branding And Visual Direction
 
@@ -81,16 +88,17 @@ Use the local Cedarville Reveal presentation conventions from `/Users/micahcoope
 
 ## Presentation Architecture
 
-Recommended narrative frame: "You already use AI. Now use a programmer."
+Recommended narrative frame: "You already use AI. Now build tools with it."
 
-The deck should move through six stages:
+The deck should move through seven stages:
 
 1. Hook
 2. Objection and reversal
 3. Proof
-4. Campus problem space
-5. Social proof and handoff
-6. Action
+4. Tool distinction
+5. Campus problem space
+6. Social proof and handoff
+7. Action
 
 This is the governing structure for both slide order and speaker notes.
 
@@ -101,7 +109,7 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 ### 1. Title Slide
 
 - Purpose: establish topic and Cedarville context
-- Recommended title: `Codex: Your Personal Programmer`
+- Recommended title: `Codex: From AI Answers to Useful Tools`
 - Recommended subtitle: `A practical introduction for Cedarville faculty and staff`
 - Visual treatment: dark slide with Cedarville branding
 - Speaker notes: brief setup, name the room, and set expectation that this is practical rather than theoretical
@@ -137,11 +145,11 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 
 - Main line: the presenter has programmed in many languages and has no idea what language Codex used because they never looked
 - Purpose: break the assumption that using Codex requires code literacy
-- Speaker notes: the real change is that implementation details can become secondary to clear intent
+- Speaker notes: the real change is that implementation details can become secondary to clear intent when the desired outcome is a working tool
 
-### 7. Personal Programmer Slide
+### 7. Tool Imagination Slide
 
-- Main line: `What could you do if someone sat next to you and programmed anything you could describe in plain English?`
+- Main line: `What tools could you have if you could describe what you wanted in plain English?`
 - Purpose: shift from the presenter's story to the audience's imagination
 - Visual treatment: clean, high-contrast, contemplative slide
 
@@ -159,31 +167,42 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 - Layout: large screenshot frame or split view
 - Notes: use a clear placeholder if the real artifact is not yet present at implementation time, but the layout must be ready for easy replacement
 
-### 10. Why This Matters Slide
+### 10. Tool Versus Output Slide
+
+- Purpose: teach the deck's key conceptual distinction
+- Message: an LLM answer is a one-time output, but a generated tool can be run again after it has been created
+- Required points:
+  - the tool continues to run independently of the chat session once built
+  - the behavior is repeatable on the next run
+  - the steps and outputs can be inspected and audited
+  - the value is not just novelty but dependable reuse
+- Layout: side-by-side comparison or strong two-column contrast
+
+### 11. Why This Matters Slide
 
 - Purpose: interpret the proof for the audience
-- Message: this is about turning a plain-English description into a working tool fast enough to matter
+- Message: this is about turning a plain-English description into a working tool fast enough to matter and stable enough to use again
 - Layout: one key statement with 2-3 supporting lines
 
-### 11. Transition Slide
+### 12. Transition Slide
 
 - Main line: `So... you're interested, but you're not sure where to begin.`
 - Purpose: pivot from proof to adoption
 
-### 12. Sigh List Slide
+### 13. Sigh List Slide
 
 - Introduce Artie Kuhn at Miami University and the "Sigh List" idea
 - Message: write down what in your life or work makes you sigh
 - Purpose: give the audience a practical starting method
 - Speaker notes: credit the source clearly and keep the explanation simple
 
-### 13. Sigh List Examples Slide
+### 14. Sigh List Examples Slide
 
 - Purpose: make the exercise concrete for faculty and staff
 - Include representative examples of routine frustrations, bottlenecks, repetitive formatting, data wrangling, or content transformation work
 - Avoid fake specificity; keep examples plausible and recognizable
 
-### 14. Campus Use Cases Slide
+### 15. Campus Use Cases Slide
 
 - Include:
   - exam questions uploaded into Canvas
@@ -193,17 +212,17 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 - Purpose: show breadth across academic and administrative work
 - Layout: grid or four-card slide
 
-### 15. Pattern Recognition Slide
+### 16. Pattern Recognition Slide
 
 - Purpose: connect the use cases into one idea
-- Message: Codex is useful where work involves boring complexity, tedious transformation, repetitive structure, or tasks that feel impossible without specialized help
-
-### 16. Audience Reflection Slide
+- Message: Codex is useful where work involves boring complexity, tedious transformation, repetitive structure, or tasks that benefit from a repeatable tool rather than another manual pass
+ 
+### 17. Audience Reflection Slide
 
 - Main line: `What in your work makes you sigh?`
 - Purpose: brief live reflection moment and setup for the workshop CTA
 
-### 17. Dr. John Delano Handoff Slide
+### 18. Dr. John Delano Handoff Slide
 
 - Purpose: transition clearly to a separate live segment
 - Naming requirement: always refer to him as `Dr. John Delano`
@@ -211,19 +230,19 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 - Layout: clean handoff slide, not crowded with details
 - Speaker notes: short verbal intro, then hand over
 
-### 18. Re-entry Slide
+### 19. Re-entry Slide
 
 - Purpose: after the Dr. John Delano segment, re-anchor the room if needed
 - Suggested line: `So where do you start?`
 - If the live flow does not need a re-entry, this slide may be omitted
 
-### 19. Workshops Slide
+### 20. Workshops Slide
 
 - Content: drop-in Codex workshops already exist, there are over a dozen people ready to help, and attendees can bring questions or ideas
 - Tone: lightly self-aware, including the line about maybe nobody coming and the team being lonely if that still lands well in notes
 - Purpose: reduce activation energy by showing help already exists
 
-### 20. Closing Action Slide
+### 21. Closing Action Slide
 
 - Main message:
   - bring your laptop
@@ -232,7 +251,7 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 - Purpose: explicit next step
 - Visual treatment: high-contrast slide with minimal text
 
-### 21. Final Slide
+### 22. Final Slide
 
 - Cedarville branded closing slide
 - Presenter line: `Micah Cooper`
@@ -249,6 +268,7 @@ They should carry:
 - comedic timing and phrasing
 - the fuller version of the knowledge-base app story
 - how to frame the prompt/output example
+- how to explain the difference between generated output and generated tools in plain language
 - handoff language to Dr. John Delano
 - the workshop invitation and sigh-list explanation
 
@@ -281,6 +301,7 @@ This is not a request for fake demo content. It is a layout requirement so the d
 - Cedarville colors and type applied consistently
 - Any required logos or fixed imagery embedded into the HTML rather than referenced by missing local paths
 - No build system required unless implementation discovers a concrete need
+- Include at least one slide that clearly distinguishes one-off LLM output from a repeatable tool that runs independently after creation
 
 ## Testing And Verification Requirements
 
@@ -310,7 +331,11 @@ Mitigation: follow provocative lines immediately with a concrete story and pract
 
 ### Risk: Audience assumes Codex is only for programmers
 
-Mitigation: place the objection slide early and use the knowledge-base story plus domain-specific examples to dismantle that assumption.
+Mitigation: place the objection slide early, use "programmer" language sparingly, and keep returning to tools, workflows, and repeatable outcomes.
+
+### Risk: Audience hears "AI made something once" rather than "I now have a dependable tool"
+
+Mitigation: add an explicit tool-versus-output slide and reinforce independence, repeatability, and auditability in both slides and notes.
 
 ### Risk: Prompt/output artifacts are not ready when the deck is built
 
