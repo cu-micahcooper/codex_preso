@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,6 +67,12 @@ class PresentationShellTests(unittest.TestCase):
     def test_first_half_contains_multiple_notes_blocks(self):
         html = read_html()
         self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
+
+    def test_task_four_contains_exactly_eleven_top_level_slides(self):
+        html = read_html()
+        slides_match = re.search(r'<div class="slides">(.*)</div>\s*</div>', html, re.DOTALL)
+        self.assertIsNotNone(slides_match)
+        self.assertEqual(slides_match.group(1).count("<section"), 11)
 
     def test_key_first_half_notes_exist(self):
         html = read_html()
