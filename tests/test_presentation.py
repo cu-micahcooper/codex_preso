@@ -69,6 +69,28 @@ class PresentationShellTests(unittest.TestCase):
         self.assertIn("cdn.jsdelivr.net/npm/reveal.js", html)
         self.assertIn("use.typekit.net/apf8ssc.css", html)
 
+    def test_no_local_asset_references_exist(self):
+        html = read_html()
+        self.assertNotIn('src="assets/', html)
+        self.assertNotIn("url('assets/", html)
+        self.assertNotIn('url("assets/', html)
+        self.assertNotRegex(html, r'src="(?!https?://|data:|#)[^"]+"')
+        self.assertNotRegex(
+            html,
+            r'href="(?!https?://|data:|#)[^"]+\.(png|jpg|jpeg|svg|gif|webp)"',
+        )
+
+    def test_prompt_and_output_placeholders_exist(self):
+        html = read_html()
+        self.assertIn("Prompt screenshot placeholder", html)
+        self.assertIn("Output screenshot placeholder", html)
+
+    def test_every_slide_has_speaker_notes(self):
+        html = read_html()
+        sections = html.count("<section")
+        notes = html.count('<aside class="notes">')
+        self.assertGreaterEqual(notes, sections)
+
     def test_brand_tokens_exist(self):
         html = read_html()
         self.assertIn("--cu-blue: #003963;", html)
