@@ -5,6 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
+MARKDOWN_EXPORT = ROOT / "docs" / "presentation-speaker-notes.md"
 
 
 def read_html():
@@ -15,12 +16,11 @@ def read_display_html():
     return html_lib.unescape(read_html())
 
 
-PROMPT_TEXT = (
-    "This project will access our TeamDynamix Knowledge Base using APIs, improve the quality of the "
-    "articles, remove redundancy and defects, identify articles in need of attention, and push corrects "
-    "back into the live environment after appropriate levels of confirmation and reference re-writing. "
-    "Develop an approproach within the KCS framework."
-)
+def read_markdown_export():
+    return MARKDOWN_EXPORT.read_text(encoding="utf-8") if MARKDOWN_EXPORT.exists() else ""
+
+
+PROMPT_TEXT = "Create a web app that lets me search a database of organic molecules and interact with 3D models of them"
 
 
 class SlidesParser(HTMLParser):
@@ -91,10 +91,27 @@ class PresentationShellTests(unittest.TestCase):
     def test_index_html_exists(self):
         self.assertTrue(INDEX.exists(), "index.html should exist")
 
+    def test_markdown_export_exists(self):
+        self.assertTrue(MARKDOWN_EXPORT.exists(), "presentation speaker-notes markdown export should exist")
+
+    def test_markdown_export_contains_titles_and_notes(self):
+        md = read_markdown_export()
+        required = [
+            "# Codex: When you’re done Chatting about your problems",
+            "## 1. Codex: When you’re done Chatting about your problems",
+            "## 9. Chat vs Codex",
+            "## 19. Let’s build something useful",
+            "Speaker notes",
+            "Some of you are thinking something right now. What are they?",
+            "Stress independence, repeatability, and auditability here.",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, md)
+
     def test_title_and_subtitle_copy_exist(self):
         html = read_display_html()
         self.assertIn("Codex: When you’re done Chatting about your problems", html)
-        self.assertIn("Let’s Build!", html)
+        self.assertIn("Let’s build!", html)
 
     def test_curly_apostrophes_are_used_in_copy(self):
         html = read_html()
@@ -238,15 +255,14 @@ class PresentationShellTests(unittest.TestCase):
             "anymore",
             "Artie Kuhn, Emerging Technology in Business + Design Department at Miami University",
             "there’s friction to eliminating it",
-            "Real world issues: Sugru",
-            "knowledge-work issues: Codex",
-            "What tools could you have if you could describe what you wanted in plain English?",
+            "Real-world issues: Sugru",
+            "Knowledge-work issues: Codex",
             "Here is what I told Codex to write.",
             "Here is what it gave me.",
             "Runs once in a chat window.",
             "Useful, but not a system.",
             "Runs independently once it is created.",
-            "repeatable on the next run",
+            "Repeatable on the next run.",
             "Auditable: inspect the logic, inputs, and results.",
         ]
         for phrase in required:
@@ -254,16 +270,20 @@ class PresentationShellTests(unittest.TestCase):
 
     def test_tool_vs_output_slide_uses_crisp_comparison_copy(self):
         parser = parse_slides()
-        self.assertIn("Tool vs. output", parser.slide_titles)
-        slide_index = parser.slide_titles.index("Tool vs. output")
+        self.assertIn("Chat vs Codex", parser.slide_titles)
+        slide_index = parser.slide_titles.index("Chat vs Codex")
         slide_text = parser.slide_texts[slide_index]
         required = [
             "LLM-generated output",
             "Runs once in a chat window.",
+            "Quick and easy",
             "Useful, but not a system.",
+            "Sometimes hallcinates",
             "LLM-built tool",
+            "Has access to local tools and data",
+            "iterates through the hacclinations",
             "Runs independently once it is created.",
-            "repeatable on the next run",
+            "Repeatable on the next run.",
             "Auditable: inspect the logic, inputs, and results.",
         ]
         for phrase in required:
@@ -273,15 +293,16 @@ class PresentationShellTests(unittest.TestCase):
 
     def test_friction_slide_uses_fragmented_parallel_examples(self):
         parser = parse_slides()
-        self.assertIn("Friction is the signal", parser.slide_titles)
-        slide_index = parser.slide_titles.index("Friction is the signal")
+        self.assertIn("Friction is the challenge", parser.slide_titles)
+        slide_index = parser.slide_titles.index("Friction is the challenge")
         slide_text = parser.slide_texts[slide_index]
-        self.assertIn("Real world issues: Sugru", slide_text)
-        self.assertIn("knowledge-work issues: Codex", slide_text)
+        self.assertIn("Real-world issues: Sugru", slide_text)
+        self.assertIn("Knowledge-work issues: Codex", slide_text)
         html = read_display_html()
         self.assertIn("class=\"fragment fade-in\"", html)
-        self.assertIn("Real world issues: Sugru", html)
-        self.assertIn("knowledge-work issues: Codex", html)
+        self.assertIn("Real-world issues: Sugru", html)
+        self.assertIn("Knowledge-work issues: Codex", html)
+        self.assertNotIn('class="split-rule"', html)
 
     def test_objection_slide_uses_anymore_fragment(self):
         parser = parse_slides()
@@ -289,6 +310,7 @@ class PresentationShellTests(unittest.TestCase):
         slide_index = parser.slide_titles.index("I don’t code. I don’t want to code.")
         slide_text = parser.slide_texts[slide_index]
         self.assertIn("anymore", slide_text)
+        self.assertEqual(parser.slide_titles[slide_index + 1], "Dr. John Delano")
         html = read_display_html()
         self.assertIn('<span class="fragment fade-in">anymore</span>', html)
         self.assertIn('alt="#vibecoding"', html)
@@ -302,7 +324,7 @@ class PresentationShellTests(unittest.TestCase):
     def test_sigh_list_follow_up_slides_are_tightened(self):
         parser = parse_slides()
         self.assertGreaterEqual(len(parser.slide_titles), 15)
-        self.assertEqual(parser.slide_titles[12], "Back to the Sigh List")
+        self.assertEqual(parser.slide_titles[12], "Back to the sigh list")
         self.assertEqual(parser.slide_titles[13], "What belongs on the list?")
         slide_text = parser.slide_texts[13]
         required = [
@@ -330,15 +352,15 @@ class PresentationShellTests(unittest.TestCase):
         )
         self.assertNotIn("Not answers. Not drafts. Tools that keep doing useful work after the chat ends.", read_display_html())
 
-    def test_slide_count_is_exactly_twenty(self):
+    def test_slide_count_is_exactly_nineteen(self):
         parser = parse_slides()
-        self.assertEqual(parser.top_level_slide_count, 20)
+        self.assertEqual(parser.top_level_slide_count, 19)
 
     def test_raw_section_count_is_in_expected_range(self):
         html = read_html()
         slide_count = html.count("<section")
-        self.assertGreaterEqual(slide_count, 20)
-        self.assertLessEqual(slide_count, 22)
+        self.assertGreaterEqual(slide_count, 19)
+        self.assertLessEqual(slide_count, 21)
 
     def test_opening_sequence_matches_task_four_spec(self):
         parser = parse_slides()
@@ -347,9 +369,9 @@ class PresentationShellTests(unittest.TestCase):
             parser.slide_titles[:5],
             [
                 "Codex: When you’re done Chatting about your problems",
+                "Sigh list",
+                "Friction is the challenge",
                 "Biggest issue I’ve heard with ChatGPT:",
-                "Sigh List",
-                "Friction is the signal",
                 "I don’t code. I don’t want to code.",
             ],
         )
@@ -363,8 +385,10 @@ class PresentationShellTests(unittest.TestCase):
     def test_key_first_half_notes_exist(self):
         html = read_display_html()
         required_notes = [
+            "Some of you are thinking something right now. What are they?",
             "Pause after this line and let the room react.",
-            "Use the exact TeamDynamix prompt text here to show how concrete the request can be.",
+            "what is sugru. story of my light switch student",
+            "Use the exact prompt text here to show how concrete the request can be.",
             "Stress independence, repeatability, and auditability here.",
         ]
         for phrase in required_notes:
@@ -373,10 +397,10 @@ class PresentationShellTests(unittest.TestCase):
     def test_adoption_and_closing_copy_exist(self):
         html = read_display_html()
         required = [
-            "Back to the Sigh List",
+            "Back to the sigh list",
             "What in your life or work makes you sigh",
-            "Real world issues: Sugru",
-            "knowledge-work issues: Codex",
+            "Real-world issues: Sugru",
+            "Knowledge-work issues: Codex",
             "What belongs on the list?",
             "Good candidates are recurring, concrete, and easy to recognize when they come back.",
             "exam questions uploaded into Canvas",
@@ -384,9 +408,9 @@ class PresentationShellTests(unittest.TestCase):
             "learning objects",
             "interlinear Bible",
             "Dr. John Delano",
-            "bring your laptop",
-            "bring your sigh list",
-            "bring one real problem",
+            "Bring your laptop",
+            "Bring your sigh list",
+            "Bring one real problem",
             "Micah Cooper",
             "micahcooper@cedarville.edu",
         ]

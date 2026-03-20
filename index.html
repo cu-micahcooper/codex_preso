@@ -17,9 +17,9 @@
 
     .reveal {
       font-family: 'minion-pro', serif;
-      font-size: 32px;
+      font-size: 34px;
       color: #222;
-      background: #f6f4ef;
+      background: #f5f1e8;
     }
 
     .reveal .slides {
@@ -32,29 +32,41 @@
       font-family: 'myriad-pro', sans-serif;
       font-weight: 600;
       color: var(--cu-blue);
-      letter-spacing: 0.01em;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0;
+      margin-bottom: 0.55rem;
     }
 
     .reveal h1 {
-      font-size: 2.2em;
-      line-height: 0.98;
+      font-size: 2.5em;
+      line-height: 0.92;
     }
 
     .reveal h2 {
-      font-size: 1.45em;
-      line-height: 1.04;
+      font-size: 1.72em;
+      line-height: 0.96;
+      max-width: 11ch;
     }
 
     .reveal p {
-      line-height: 1.3;
+      line-height: 1.28;
     }
 
     .content-slide {
-      padding: 3.2rem 3.6rem !important;
-      background: #fbfaf7;
+      padding: 3.3rem 3.9rem !important;
+      background: #fcfaf4;
       position: relative;
       overflow: hidden;
+    }
+
+    .content-slide::before {
+      content: "";
+      position: absolute;
+      top: 2rem;
+      left: 3.9rem;
+      width: 4.2rem;
+      height: 4px;
+      background: var(--cu-gold);
+      z-index: 0;
     }
 
     .content-slide > * {
@@ -79,32 +91,28 @@
 
     .two-col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 2.2rem;
       align-items: start;
-      margin-top: 1rem;
+      margin-top: 1.25rem;
     }
 
     .lede {
       font-family: 'myriad-pro', sans-serif;
-      font-size: 1em;
-      line-height: 1.28;
-      margin: 0 0 0.9rem;
-    }
-
-    .prompt-text {
-      font-family: 'myriad-pro', sans-serif;
-      font-size: 0.78em;
-      line-height: 1.35;
+      font-size: 1.04em;
+      line-height: 1.22;
+      margin: 0 0 0.95rem;
+      max-width: 18ch;
     }
 
     .prompt-quote {
-      border-left: 4px solid var(--cu-gold);
-      font-size: 0.78em;
-      line-height: 1.35;
-      margin: 1rem 0 0;
-      max-width: 30rem;
-      padding: 0.15rem 0 0.15rem 1rem;
+      border-left: 6px solid var(--cu-gold);
+      color: var(--cu-blue);
+      font-size: 0.88em;
+      line-height: 1.32;
+      margin: 1.4rem 0 0;
+      max-width: 33rem;
+      padding: 0.2rem 0 0.2rem 1.2rem;
     }
 
     .prompt-quote p {
@@ -113,29 +121,34 @@
 
     .slide-art {
       display: block;
-      margin: 0 auto;
-      max-width: 100%;
+      margin: 1rem 0 0;
+      max-width: 24rem;
       width: 100%;
     }
 
-    .split-rule {
-      border-top: 2px solid rgba(0, 57, 99, 0.14);
-      padding-top: 0.7rem;
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem;
+      margin-top: 1.25rem;
     }
 
-    .dark-slide .split-rule {
-      border-top-color: rgba(255, 255, 255, 0.22);
+    .comparison-grid > div {
+      border-top: 2px solid rgba(0, 57, 99, 0.16);
+      padding-top: 0.9rem;
     }
 
-    .mini-head {
+    .comparison-grid h3 {
+      font-size: 0.9em;
+      line-height: 1.02;
+      margin-top: 0;
+      margin-bottom: 0.55rem;
+    }
+
+    .comparison-grid p {
       font-family: 'myriad-pro', sans-serif;
-      font-size: 0.74em;
-      color: var(--cu-blue);
-      margin: 0 0 0.35rem;
-    }
-
-    .dark-slide .mini-head {
-      color: var(--cu-gold);
+      margin: 0 0 0.55rem;
+      max-width: 18ch;
     }
 
     .reveal ul {
@@ -165,7 +178,15 @@
         padding: 2.4rem 2rem !important;
       }
 
+      .content-slide::before {
+        left: 2rem;
+      }
+
       .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -176,8 +197,35 @@
     <div class="slides">
       <section class="dark-slide" style="text-align: center;">
         <h1>Codex: When you&#x2019;re done Chatting about your problems</h1>
-        <p class="lede" style="color: var(--cu-gold); margin-top: 1rem;">Let&#x2019;s Build!</p>
+        <p class="lede" style="color: var(--cu-gold); margin-top: 1rem;">Let&#x2019;s build!</p>
         <aside class="notes">Open by shifting the room from talking about problems to building tools that solve them.</aside>
+      </section>
+      <section class="content-slide">
+        <h2>Sigh list</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">Artie Kuhn, Emerging Technology in Business + Design Department at Miami University</p>
+          </div>
+          <div>
+            <p class="lede">What in your life or work makes you sigh?</p>
+          </div>
+        </div>
+        <aside class="notes">Some of you are thinking something right now. What are they?</aside>
+      </section>
+      <section class="content-slide">
+        <h2>Friction is the challenge</h2>
+        <div class="comparison-grid">
+          <div>
+            <p class="lede">If something keeps bringing pain, there&#x2019;s friction to eliminating it.</p>
+          </div>
+          <div>
+            <h3 class="fragment fade-in">Real-world issues: Sugru</h3>
+            <p class="fragment fade-in">Use a practical tool to remove physical friction.</p>
+            <h3 class="fragment fade-in">Knowledge-work issues: Codex</h3>
+            <p class="fragment fade-in">Use a practical tool to remove digital friction.</p>
+          </div>
+        </div>
+        <aside class="notes">what is sugru. story of my light switch student</aside>
       </section>
       <section class="dark-slide">
         <h2>Biggest issue I&#x2019;ve heard with ChatGPT:</h2>
@@ -190,33 +238,6 @@
           </div>
         </div>
         <aside class="notes">Pause after this line and let the room react.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Sigh List</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Artie Kuhn, Emerging Technology in Business + Design Department at Miami University</p>
-          </div>
-          <div>
-            <p class="lede">What in your life or work makes you sigh?</p>
-          </div>
-        </div>
-        <aside class="notes">Credit Artie Kuhn at Miami University here.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Friction is the signal</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">If something keeps bringing pain, there&#x2019;s friction to eliminating it.</p>
-          </div>
-          <div class="split-rule">
-            <h3 class="fragment fade-in">Real world issues: Sugru</h3>
-            <p class="fragment fade-in">Use a practical tool to remove physical friction.</p>
-            <h3 class="fragment fade-in">knowledge-work issues: Codex</h3>
-            <p class="fragment fade-in">Use a practical tool to remove digital friction.</p>
-          </div>
-        </div>
-        <aside class="notes">Move from complaint to action by naming friction as the thing to eliminate.</aside>
       </section>
       <section class="content-slide">
         <h2>I don&#x2019;t code. I don&#x2019;t want to code.</h2>
@@ -234,34 +255,38 @@
         </div>
         <aside class="notes">Voice the resistance plainly before reframing it.</aside>
       </section>
-      <section class="content-slide">
-        <h2>Tool imagination</h2>
-        <p class="lede">What tools could you have if you could describe what you wanted in plain English?</p>
-        <aside class="notes">Let the room imagine their own backlog of missing tools here.</aside>
+      <section class="dark-slide" style="text-align: center;">
+        <h2>Dr. John Delano</h2>
+        <p class="lede">Custom learning modules for the impatient</p>
+        <aside class="notes">Short handoff, then stop talking.</aside>
       </section>
       <section class="content-slide">
         <h2>Here is what I told Codex to write.</h2>
         <blockquote class="prompt-quote">
-          <p>This project will access our TeamDynamix Knowledge Base using APIs, improve the quality of the articles, remove redundancy and defects, identify articles in need of attention, and push corrects back into the live environment after appropriate levels of confirmation and reference re-writing. Develop an approproach within the KCS framework.</p>
+          <p>Create a web app that lets me search a database of organic molecules and interact with 3D models of them</p>
         </blockquote>
-        <aside class="notes">Use the exact TeamDynamix prompt text here to show how concrete the request can be.</aside>
+        <aside class="notes">Use the exact prompt text here to show how concrete the request can be.</aside>
       </section>
       <section class="content-slide">
         <h2>Here is what it gave me.</h2>
         <aside class="notes">Keep the proof concrete and visible instead of abstract.</aside>
       </section>
       <section class="content-slide">
-        <h2>Tool vs. output</h2>
-        <div class="two-col">
+        <h2>Chat vs Codex</h2>
+        <div class="comparison-grid">
           <div>
             <h3>LLM-generated output</h3>
             <p>Runs once in a chat window.</p>
+            <p>Quick and easy</p>
             <p>Useful, but not a system.</p>
+            <p>Sometimes hallcinates</p>
           </div>
-          <div class="split-rule">
+          <div>
             <h3>LLM-built tool</h3>
+            <p>Has access to local tools and data</p>
+            <p>iterates through the hacclinations</p>
             <p>Runs independently once it is created.</p>
-            <p>repeatable on the next run</p>
+            <p>Repeatable on the next run.</p>
             <p>Auditable: inspect the logic, inputs, and results.</p>
             <img
               class="slide-art"
@@ -297,12 +322,12 @@
         <aside class="notes">Use this slide to shift from proof to adoption without changing the tools-first framing.</aside>
       </section>
       <section class="content-slide">
-        <h2>Sigh List</h2>
+        <h2>Sigh list</h2>
         <p>What in your life or work makes you sigh?</p>
         <aside class="notes">Credit Artie Kuhn at Miami University here.</aside>
       </section>
       <section class="content-slide">
-        <h2>Back to the Sigh List</h2>
+        <h2>Back to the sigh list</h2>
         <div class="two-col">
           <div>
             <ul>
@@ -346,11 +371,6 @@
         </div>
         <aside class="notes">Pause long enough for people to identify one real candidate from their own context.</aside>
       </section>
-      <section class="dark-slide" style="text-align: center;">
-        <h2>Dr. John Delano</h2>
-        <p class="lede">Here is someone on campus already doing this work.</p>
-        <aside class="notes">Short handoff, then stop talking.</aside>
-      </section>
       <section class="content-slide">
         <h2>When you come back to your desk</h2>
         <div class="two-col">
@@ -367,7 +387,7 @@
         <h2>Workshops</h2>
         <div class="two-col">
           <div>
-            <p class="lede">bring your laptop. bring your sigh list. bring one real problem.</p>
+            <p class="lede">Bring your laptop. Bring your sigh list. Bring one real problem.</p>
           </div>
           <div>
             <p class="lede">We will turn a recurring problem into a concrete tool idea you can test.</p>
@@ -391,7 +411,7 @@
         <h2>Let&#x2019;s build something useful</h2>
         <p style="margin-bottom: 0.25rem;">Micah Cooper</p>
         <p style="margin: 0.25rem 0;">micahcooper@cedarville.edu</p>
-        <p style="margin-top: 0.9rem;">bring your laptop. bring your sigh list. bring one real problem.</p>
+        <p style="margin-top: 0.9rem;">Bring your laptop. Bring your sigh list. Bring one real problem.</p>
         <aside class="notes">End on the invitation and contact line so the audience leaves with a specific next action.</aside>
       </section>
     </div>
