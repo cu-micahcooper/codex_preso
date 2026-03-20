@@ -149,6 +149,13 @@ class PresentationShellTests(unittest.TestCase):
         self.assertIn(".two-col", html)
         self.assertIn(".callout-box", html)
 
+    def test_bullet_lists_use_custom_marker_layout(self):
+        html = read_html()
+        self.assertIn(".reveal ul {", html)
+        self.assertIn("list-style: none;", html)
+        self.assertIn(".reveal ul li::before {", html)
+        self.assertIn('content: "•";', html)
+
     def test_core_hook_and_proof_copy_exist(self):
         html = read_html()
         required = [
