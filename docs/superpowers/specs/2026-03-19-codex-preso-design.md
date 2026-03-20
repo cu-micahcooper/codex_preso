@@ -262,6 +262,10 @@ The implementation should assume three asset categories:
 2. Optional screenshot or text artifacts for the prompt and output slides
 3. No complex build assets or media dependencies unless they become necessary later
 
+### Logo Handling
+
+The final deliverable is a single-file presentation. If logos are used, they should be embedded directly in `index.html` rather than referenced as external local files. If a suitable logo asset is not available at implementation time, prefer a logo-free branded layout over shipping broken references.
+
 ### Placeholder Strategy
 
 The prompt and output slides must be implementation-ready even if the final screenshots are not yet available. Use clearly marked placeholder regions that can be replaced later without changing slide structure, typography, spacing, or notes.
@@ -275,6 +279,7 @@ This is not a request for fake demo content. It is a layout requirement so the d
 - Notes plugin enabled
 - Adobe Typekit stylesheet included
 - Cedarville colors and type applied consistently
+- Any required logos or fixed imagery embedded into the HTML rather than referenced by missing local paths
 - No build system required unless implementation discovers a concrete need
 
 ## Testing And Verification Requirements
