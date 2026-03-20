@@ -6,19 +6,65 @@
   <title>Codex: When you're done Chatting about your problems</title>
   <link rel="stylesheet" href="https://use.typekit.net/apf8ssc.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <style>
+    :root {
+      --cu-blue: #003963;
+      --cu-gold: #FBB93A;
+      --cu-orange: #F59536;
+      --cu-white: #FFFFFF;
+      --cu-gray: #E7E6E6;
+    }
+
+    .reveal {
+      font-family: 'minion-pro', serif;
+      color: #222;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      font-family: 'myriad-pro', sans-serif;
+      font-weight: 600;
+    }
+
+    .dark-slide {
+      background: var(--cu-blue) !important;
+      color: white;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .callout-box {
+      background: var(--cu-blue);
+      color: white;
+      padding: 0.75rem 1rem;
+    }
+  </style>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-      <section>
+      <section class="dark-slide">
         <h1>Codex: When you're done Chatting about your problems</h1>
         <p>Have Codex build solutions</p>
+        <aside class="notes">Temporary speaker note for the title slide.</aside>
       </section>
     </div>
   </div>
   <script type="module">
     import Reveal from 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.esm.js';
-    Reveal.initialize({ hash: true });
+    import RevealNotes from 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.esm.js';
+
+    Reveal.initialize({
+      plugins: [RevealNotes],
+      hash: true,
+      transition: 'fade',
+      transitionSpeed: 'fast'
+    });
   </script>
 </body>
 </html>

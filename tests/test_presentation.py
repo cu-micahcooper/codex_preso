@@ -22,3 +22,21 @@ class PresentationShellTests(unittest.TestCase):
         html = read_html()
         self.assertIn("cdn.jsdelivr.net/npm/reveal.js", html)
         self.assertIn("use.typekit.net/apf8ssc.css", html)
+
+    def test_brand_tokens_exist(self):
+        html = read_html()
+        self.assertIn("--cu-blue: #003963;", html)
+        self.assertIn("--cu-gold: #FBB93A;", html)
+        self.assertIn("font-family: 'myriad-pro', sans-serif;", html)
+        self.assertIn("font-family: 'minion-pro', serif;", html)
+
+    def test_notes_plugin_and_speaker_notes_markup_exist(self):
+        html = read_html()
+        self.assertIn("plugin/notes/notes.esm.js", html)
+        self.assertIn("<aside class=\"notes\">", html)
+
+    def test_layout_utilities_exist(self):
+        html = read_html()
+        self.assertIn(".dark-slide", html)
+        self.assertIn(".two-col", html)
+        self.assertIn(".callout-box", html)
