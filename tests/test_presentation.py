@@ -165,8 +165,9 @@ class PresentationShellTests(unittest.TestCase):
             self.assertIn(phrase, html)
 
     def test_first_half_contains_multiple_notes_blocks(self):
-        html = read_html()
-        self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
+        parser = parse_slides()
+        self.assertGreaterEqual(len(parser.slide_has_notes), 11)
+        self.assertTrue(all(parser.slide_has_notes[:11]))
 
     def test_slide_count_is_exactly_twenty_two(self):
         parser = parse_slides()
