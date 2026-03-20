@@ -17,6 +17,11 @@ class SlidesParser(HTMLParser):
         self.in_slides_div = False
         self.top_level_slide_count = 0
         self.slide_titles = []
+        self.slide_texts = []
+        self.slide_has_notes = []
+        self._capture_slide_text = False
+        self._current_slide_text = []
+        self._current_slide_has_notes = False
         self._capture_title = False
         self._current_title = []
 
@@ -27,9 +32,16 @@ class SlidesParser(HTMLParser):
         elif self.in_slides_div and tag == "section" and not any(item == "section" for item in self.stack):
             self.top_level_slide_count += 1
             self._current_title = []
+            self._current_slide_text = []
+            self._current_slide_has_notes = False
+            self._capture_slide_text = True
         elif self.in_slides_div and tag in {"h1", "h2"} and any(item == "section" for item in self.stack):
             if self._current_title == []:
                 self._capture_title = True
+        elif self.in_slides_div and tag == "aside" and attrs_dict.get("class") == "notes" and any(
+            item == "section" for item in self.stack
+        ):
+            self._current_slide_has_notes = True
         self.stack.append(tag)
 
     def handle_endtag(self, tag):
@@ -38,6 +50,11 @@ class SlidesParser(HTMLParser):
             if title:
                 self.slide_titles.append(title)
             self._capture_title = False
+        if self._capture_slide_text and tag == "section" and any(item == "section" for item in self.stack):
+            text = "".join(self._current_slide_text).strip()
+            self.slide_texts.append(text)
+            self.slide_has_notes.append(self._current_slide_has_notes)
+            self._capture_slide_text = False
         if tag == "div" and self.in_slides_div and self.stack and self.stack[-1] == "div":
             if len(self.stack) >= 1 and "section" not in self.stack:
                 self.in_slides_div = False
@@ -47,6 +64,8 @@ class SlidesParser(HTMLParser):
     def handle_data(self, data):
         if self._capture_title:
             self._current_title.append(data)
+        if self._capture_slide_text:
+            self._current_slide_text.append(data)
 
 
 def parse_slides():
@@ -71,25 +90,39 @@ class PresentationShellTests(unittest.TestCase):
 
     def test_no_local_asset_references_exist(self):
         html = read_html()
-        self.assertNotIn('src="assets/', html)
-        self.assertNotIn("url('assets/", html)
-        self.assertNotIn('url("assets/', html)
-        self.assertNotRegex(html, r'src="(?!https?://|data:|#)[^"]+"')
         self.assertNotRegex(
             html,
-            r'href="(?!https?://|data:|#)[^"]+\.(png|jpg|jpeg|svg|gif|webp)"',
+            r"""(?is)(?:src|href|poster|data-src|data-background(?:-image|-video|-iframe)?)\s*=\s*['"](?!https?://|data:|#|//)[^'"]+['"]""",
         )
+        self.assertNotRegex(html, r"(?is)url\(\s*['\"]?/(?!/)[^'\"\)]+['\"]?\s*\)")
+        self.assertNotIn("src=\"assets/", html)
+        self.assertNotIn("src='assets/", html)
+        self.assertNotIn("href=\"assets/", html)
+        self.assertNotIn("href='assets/", html)
+        self.assertNotIn("data-src=\"assets/", html)
+        self.assertNotIn("data-src='assets/", html)
+        self.assertNotIn("poster=\"assets/", html)
+        self.assertNotIn("poster='assets/", html)
+        self.assertNotIn("url('assets/", html)
+        self.assertNotIn('url("assets/', html)
+        self.assertNotIn("url(/", html)
 
     def test_prompt_and_output_placeholders_exist(self):
-        html = read_html()
-        self.assertIn("Prompt screenshot placeholder", html)
-        self.assertIn("Output screenshot placeholder", html)
+        parser = parse_slides()
+        proof_slides = {
+            "Here is what I told Codex to write.": "Prompt screenshot placeholder",
+            "Here is what it gave me.": "Output screenshot placeholder",
+        }
+        for title, placeholder in proof_slides.items():
+            self.assertIn(title, parser.slide_titles)
+            slide_index = parser.slide_titles.index(title)
+            self.assertIn(placeholder, parser.slide_texts[slide_index])
 
     def test_every_slide_has_speaker_notes(self):
-        html = read_html()
-        sections = html.count("<section")
-        notes = html.count('<aside class="notes">')
-        self.assertGreaterEqual(notes, sections)
+        parser = parse_slides()
+        self.assertEqual(parser.top_level_slide_count, len(parser.slide_has_notes))
+        self.assertTrue(parser.slide_has_notes)
+        self.assertTrue(all(parser.slide_has_notes))
 
     def test_brand_tokens_exist(self):
         html = read_html()
