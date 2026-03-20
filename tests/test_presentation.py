@@ -1,5 +1,5 @@
+from html.parser import HTMLParser
 from pathlib import Path
-import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,6 +8,51 @@ INDEX = ROOT / "index.html"
 
 def read_html():
     return INDEX.read_text(encoding="utf-8") if INDEX.exists() else ""
+
+
+class SlidesParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.stack = []
+        self.in_slides_div = False
+        self.top_level_slide_count = 0
+        self.slide_titles = []
+        self._capture_title = False
+        self._current_title = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs_dict = dict(attrs)
+        if tag == "div" and attrs_dict.get("class") == "slides":
+            self.in_slides_div = True
+        elif self.in_slides_div and tag == "section" and not any(item == "section" for item in self.stack):
+            self.top_level_slide_count += 1
+            self._current_title = []
+        elif self.in_slides_div and tag in {"h1", "h2"} and any(item == "section" for item in self.stack):
+            if self._current_title == []:
+                self._capture_title = True
+        self.stack.append(tag)
+
+    def handle_endtag(self, tag):
+        if self._capture_title and tag in {"h1", "h2"}:
+            title = "".join(self._current_title).strip()
+            if title:
+                self.slide_titles.append(title)
+            self._capture_title = False
+        if tag == "div" and self.in_slides_div and self.stack and self.stack[-1] == "div":
+            if len(self.stack) >= 1 and "section" not in self.stack:
+                self.in_slides_div = False
+        if self.stack:
+            self.stack.pop()
+
+    def handle_data(self, data):
+        if self._capture_title:
+            self._current_title.append(data)
+
+
+def parse_slides():
+    parser = SlidesParser()
+    parser.feed(read_html())
+    return parser
 
 
 class PresentationShellTests(unittest.TestCase):
@@ -69,10 +114,21 @@ class PresentationShellTests(unittest.TestCase):
         self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
 
     def test_task_four_contains_exactly_eleven_top_level_slides(self):
-        html = read_html()
-        slides_match = re.search(r'<div class="slides">(.*)</div>\s*</div>', html, re.DOTALL)
-        self.assertIsNotNone(slides_match)
-        self.assertEqual(slides_match.group(1).count("<section"), 11)
+        parser = parse_slides()
+        self.assertEqual(parser.top_level_slide_count, 11)
+
+    def test_opening_sequence_matches_task_four_spec(self):
+        parser = parse_slides()
+        self.assertGreaterEqual(len(parser.slide_titles), 4)
+        self.assertEqual(
+            parser.slide_titles[:4],
+            [
+                "Codex: When you're done Chatting about your problems",
+                "Stop using AI for what you're already good at.",
+                "Use it for what you're not good at.",
+                "I don't code. I don't want to code.",
+            ],
+        )
 
     def test_key_first_half_notes_exist(self):
         html = read_html()
