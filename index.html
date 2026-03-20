@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Codex: When you're done Chatting about your problems</title>
+  <title>Codex: When you&#x2019;re done Chatting about your problems</title>
   <link rel="stylesheet" href="https://use.typekit.net/apf8ssc.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
   <style>
@@ -17,7 +17,13 @@
 
     .reveal {
       font-family: 'minion-pro', serif;
+      font-size: 32px;
       color: #222;
+      background: #f6f4ef;
+    }
+
+    .reveal .slides {
+      text-align: left;
     }
 
     .reveal h1,
@@ -25,10 +31,49 @@
     .reveal h3 {
       font-family: 'myriad-pro', sans-serif;
       font-weight: 600;
+      color: var(--cu-blue);
+      letter-spacing: 0.01em;
+      margin-bottom: 0.4rem;
+    }
+
+    .reveal h1 {
+      font-size: 2.2em;
+      line-height: 0.98;
+    }
+
+    .reveal h2 {
+      font-size: 1.45em;
+      line-height: 1.04;
+    }
+
+    .reveal p {
+      line-height: 1.3;
+    }
+
+    .content-slide {
+      padding: 3.2rem 3.6rem !important;
+      background: #fbfaf7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-slide > * {
+      position: relative;
+      z-index: 1;
     }
 
     .dark-slide {
       background: var(--cu-blue) !important;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reveal .slides section.dark-slide h1,
+    .reveal .slides section.dark-slide h2,
+    .reveal .slides section.dark-slide h3,
+    .reveal .slides section.dark-slide p,
+    .reveal .slides section.dark-slide li {
       color: white;
     }
 
@@ -36,12 +81,61 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
+      align-items: start;
+      margin-top: 1rem;
     }
 
-    .callout-box {
-      background: var(--cu-blue);
-      color: white;
-      padding: 0.75rem 1rem;
+    .lede {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 1em;
+      line-height: 1.28;
+      margin: 0 0 0.9rem;
+    }
+
+    .prompt-text {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 0.78em;
+      line-height: 1.35;
+    }
+
+    .prompt-quote {
+      border-left: 4px solid var(--cu-gold);
+      font-size: 0.78em;
+      line-height: 1.35;
+      margin: 1rem 0 0;
+      max-width: 30rem;
+      padding: 0.15rem 0 0.15rem 1rem;
+    }
+
+    .prompt-quote p {
+      margin: 0;
+    }
+
+    .slide-art {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .split-rule {
+      border-top: 2px solid rgba(0, 57, 99, 0.14);
+      padding-top: 0.7rem;
+    }
+
+    .dark-slide .split-rule {
+      border-top-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .mini-head {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 0.74em;
+      color: var(--cu-blue);
+      margin: 0 0 0.35rem;
+    }
+
+    .dark-slide .mini-head {
+      color: var(--cu-gold);
     }
 
     .reveal ul {
@@ -65,78 +159,141 @@
       line-height: 1.1;
       flex: 0 0 auto;
     }
+
+    @media (max-width: 900px) {
+      .content-slide {
+        padding: 2.4rem 2rem !important;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
     <div class="reveal">
     <div class="slides">
-      <section class="dark-slide">
-        <h1>Codex: When you're done Chatting about your problems</h1>
-        <p>Have Codex build solutions</p>
+      <section class="dark-slide" style="text-align: center;">
+        <h1>Codex: When you&#x2019;re done Chatting about your problems</h1>
+        <p class="lede" style="color: var(--cu-gold); margin-top: 1rem;">Let&#x2019;s Build!</p>
         <aside class="notes">Open by shifting the room from talking about problems to building tools that solve them.</aside>
       </section>
       <section class="dark-slide">
-        <h2>Stop using AI for what you're already good at.</h2>
+        <h2>Biggest issue I&#x2019;ve heard with ChatGPT:</h2>
+        <div class="two-col">
+          <div>
+            <p class="fragment fade-in" style="font-family: 'myriad-pro', sans-serif; font-size: 1em; line-height: 1.28;">It&#x2019;s not better than I am at xyz</p>
+          </div>
+          <div>
+            <p class="fragment fade-in" style="font-family: 'myriad-pro', sans-serif; font-size: 1em; line-height: 1.28; color: var(--cu-gold);">Try using it for what you&#x2019;re not good at</p>
+          </div>
+        </div>
         <aside class="notes">Pause after this line and let the room react.</aside>
       </section>
       <section class="content-slide">
-        <h2>Use it for what you're not good at.</h2>
-        <p>This is not anti-LLM. It is a claim about where the leverage actually compounds.</p>
-        <aside class="notes">Clarify that the argument is about leverage, not ideology.</aside>
+        <h2>Sigh List</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">Artie Kuhn, Emerging Technology in Business + Design Department at Miami University</p>
+          </div>
+          <div>
+            <p class="lede">What in your life or work makes you sigh?</p>
+          </div>
+        </div>
+        <aside class="notes">Credit Artie Kuhn at Miami University here.</aside>
       </section>
       <section class="content-slide">
-        <h2>I don't code. I don't want to code.</h2>
+        <h2>Friction is the signal</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">If something keeps bringing pain, there&#x2019;s friction to eliminating it.</p>
+          </div>
+          <div class="split-rule">
+            <h3 class="fragment fade-in">Real world issues: Sugru</h3>
+            <p class="fragment fade-in">Use a practical tool to remove physical friction.</p>
+            <h3 class="fragment fade-in">knowledge-work issues: Codex</h3>
+            <p class="fragment fade-in">Use a practical tool to remove digital friction.</p>
+          </div>
+        </div>
+        <aside class="notes">Move from complaint to action by naming friction as the thing to eliminate.</aside>
+      </section>
+      <section class="content-slide">
+        <h2>I don&#x2019;t code. I don&#x2019;t want to code.</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">Yeah, me either ... <span class="fragment fade-in">anymore</span></p>
+          </div>
+          <div>
+            <img
+              class="slide-art"
+              alt="#vibecoding"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MjAgNTIwJz4KICA8cmVjdCB3aWR0aD0nNzIwJyBoZWlnaHQ9JzUyMCcgZmlsbD0nI2Y2ZjRlZicvPgogIDxyZWN0IHg9JzgyJyB5PSc4OCcgd2lkdGg9JzQzMCcgaGVpZ2h0PScyNTYnIHJ4PScyMCcgZmlsbD0nIzAwMzk2MycvPgogIDxjaXJjbGUgY3g9JzExOCcgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2Y1OTUzNicvPgogIDxjaXJjbGUgY3g9JzE0NicgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2ZiYjkzYScvPgogIDxjaXJjbGUgY3g9JzE3NCcgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2U3ZTZlNicvPgogIDxyZWN0IHg9JzExNCcgeT0nMTU2JyB3aWR0aD0nMTM4JyBoZWlnaHQ9JzE4JyByeD0nOScgZmlsbD0nI2ZiYjkzYScvPgogIDxyZWN0IHg9JzExNCcgeT0nMTk0JyB3aWR0aD0nMjk2JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjknLz4KICA8cmVjdCB4PScxMTQnIHk9JzIyNCcgd2lkdGg9JzI1MicgaGVpZ2h0PScxNCcgcng9JzcnIGZpbGw9JyNmZmZmZmYnIGZpbGwtb3BhY2l0eT0nMC43Jy8+CiAgPHJlY3QgeD0nMTE0JyB5PScyNTQnIHdpZHRoPSczMTgnIGhlaWdodD0nMTQnIHJ4PSc3JyBmaWxsPScjZmZmZmZmJyBmaWxsLW9wYWNpdHk9JzAuODInLz4KICA8cmVjdCB4PScxMTQnIHk9JzI4NCcgd2lkdGg9JzIwNicgaGVpZ2h0PScxNCcgcng9JzcnIGZpbGw9JyNmZmZmZmYnIGZpbGwtb3BhY2l0eT0nMC41OCcvPgogIDxwYXRoIGQ9J001NCAzOTJoNDkybDQ0IDM0SDEweicgZmlsbD0nIzAwMzk2MycvPgogIDxyZWN0IHg9JzQ3MicgeT0nMTI4JyB3aWR0aD0nMTg2JyBoZWlnaHQ9JzE4Nicgcng9JzMwJyBmaWxsPScjZjU5NTM2Jy8+CiAgPHRleHQgeD0nNTY1JyB5PScxOTQnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPSczNCcgZm9udC13ZWlnaHQ9JzcwMCcgZmlsbD0nI2ZmZmZmZic+I3ZpYmU8L3RleHQ+CiAgPHRleHQgeD0nNTY1JyB5PScyMzYnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPSczNCcgZm9udC13ZWlnaHQ9JzcwMCcgZmlsbD0nI2ZmZmZmZic+Y29kaW5nPC90ZXh0PgogIDxwYXRoIGQ9J001MTQgMjY4aDEwMycgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KICA8cGF0aCBkPSdNNTMwIDI5Mmg3Micgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9zdmc+Cg=="
+            />
+          </div>
+        </div>
         <aside class="notes">Voice the resistance plainly before reframing it.</aside>
       </section>
       <section class="content-slide">
-        <h2>A real constraint</h2>
-        <p>I needed a knowledge-base app, but I did not want to become a software engineer to get one.</p>
-        <aside class="notes">Keep this grounded in a concrete problem, not a hypothetical.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Language is the abstraction</h2>
-        <p>You do not need programmer fluency first if you can specify outcomes, constraints, and revisions in plain English.</p>
-        <aside class="notes">Reframe the skill from syntax mastery to clear specification.</aside>
-      </section>
-      <section class="content-slide">
         <h2>Tool imagination</h2>
-        <p>What tools could you have if you could describe what you wanted in plain English?</p>
+        <p class="lede">What tools could you have if you could describe what you wanted in plain English?</p>
         <aside class="notes">Let the room imagine their own backlog of missing tools here.</aside>
       </section>
       <section class="content-slide">
         <h2>Here is what I told Codex to write.</h2>
-        <div class="callout-box">Prompt screenshot placeholder</div>
-        <aside class="notes">Replace this box with the real prompt artifact later.</aside>
+        <blockquote class="prompt-quote">
+          <p>This project will access our TeamDynamix Knowledge Base using APIs, improve the quality of the articles, remove redundancy and defects, identify articles in need of attention, and push corrects back into the live environment after appropriate levels of confirmation and reference re-writing. Develop an approproach within the KCS framework.</p>
+        </blockquote>
+        <aside class="notes">Use the exact TeamDynamix prompt text here to show how concrete the request can be.</aside>
       </section>
       <section class="content-slide">
         <h2>Here is what it gave me.</h2>
-        <div class="callout-box">Output screenshot placeholder</div>
         <aside class="notes">Keep the proof concrete and visible instead of abstract.</aside>
       </section>
       <section class="content-slide">
         <h2>Tool vs. output</h2>
         <div class="two-col">
           <div>
-            <h3>LLM output</h3>
-            <p>An answer you got once in chat.</p>
-            <p>an LLM answer is a one-time output</p>
+            <h3>LLM-generated output</h3>
+            <p>Runs once in a chat window.</p>
+            <p>Useful, but not a system.</p>
           </div>
-          <div>
+          <div class="split-rule">
             <h3>LLM-built tool</h3>
-            <p>A tool you can run again, inspect, and trust.</p>
+            <p>Runs independently once it is created.</p>
             <p>repeatable on the next run</p>
+            <p>Auditable: inspect the logic, inputs, and results.</p>
+            <img
+              class="slide-art"
+              alt="Tool vs. output illustration"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MjAgNTIwJz4KICA8cmVjdCB3aWR0aD0nNzIwJyBoZWlnaHQ9JzUyMCcgZmlsbD0nI2Y2ZjRlZicvPgogIDxyZWN0IHg9JzY0JyB5PScxMTQnIHdpZHRoPScyNTAnIGhlaWdodD0nMTgwJyByeD0nMjgnIGZpbGw9JyNmZmZmZmYnIHN0cm9rZT0nIzAwMzk2Mycgc3Ryb2tlLXdpZHRoPSc4Jy8+CiAgPHBhdGggZD0nTTEyMiAxOTBoMTMwJyBzdHJva2U9JyMwMDM5NjMnIHN0cm9rZS13aWR0aD0nMTYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgogIDxwYXRoIGQ9J00xMjIgMjI4aDkyJyBzdHJva2U9JyNmNTk1MzYnIHN0cm9rZS13aWR0aD0nMTYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgogIDxjaXJjbGUgY3g9JzEwNCcgY3k9JzE5MCcgcj0nMTAnIGZpbGw9JyNmYmI5M2EnLz4KICA8Y2lyY2xlIGN4PScxMDQnIGN5PScyMjgnIHI9JzEwJyBmaWxsPScjZjU5NTM2Jy8+CiAgPHBhdGggZD0nTTM1NCAyMDZoODQnIHN0cm9rZT0nI2Y1OTUzNicgc3Ryb2tlLXdpZHRoPScxMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CiAgPHBhdGggZD0nTTQwNiAxNzJsMzggMzQtMzggMzQnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2Y1OTUzNicgc3Ryb2tlLXdpZHRoPScxMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+CiAgPHJlY3QgeD0nNDU0JyB5PSc4OCcgd2lkdGg9JzIwMicgaGVpZ2h0PScyNTAnIHJ4PScyOCcgZmlsbD0nIzAwMzk2MycvPgogIDxyZWN0IHg9JzQ5MCcgeT0nMTM4JyB3aWR0aD0nMTMwJyBoZWlnaHQ9JzE4JyByeD0nOScgZmlsbD0nI2ZiYjkzYScvPgogIDxyZWN0IHg9JzQ5MCcgeT0nMTgyJyB3aWR0aD0nMTE4JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjknLz4KICA8cmVjdCB4PSc0OTAnIHk9JzIxNCcgd2lkdGg9Jzk2JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjc1Jy8+CiAgPHJlY3QgeD0nNDkwJyB5PScyNDYnIHdpZHRoPScxMzYnIGhlaWdodD0nMTQnIHJ4PSc3JyBmaWxsPScjZmZmZmZmJyBmaWxsLW9wYWNpdHk9JzAuODUnLz4KICA8cGF0aCBkPSdNNTEwIDMwMmwxOCAxOCA0Mi00NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjZmJiOTNhJyBzdHJva2Utd2lkdGg9JzE0JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnLz4KICA8dGV4dCB4PScxODknIHk9JzM0NCcgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzI4JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMDAzOTYzJz5jaGF0IG91dHB1dDwvdGV4dD4KICA8dGV4dCB4PSc1NTYnIHk9JzM4NCcgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzI4JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMDAzOTYzJz5yZXBlYXRhYmxlIHRvb2w8L3RleHQ+Cjwvc3ZnPgo="
+            />
           </div>
         </div>
         <aside class="notes">Stress independence, repeatability, and auditability here.</aside>
       </section>
       <section class="content-slide">
         <h2>Why this matters</h2>
-        <p>Once the deliverable is a tool instead of a one-off reply, you gain leverage that survives the chat window.</p>
+        <div class="two-col">
+          <div>
+            <p class="lede">A tool survives the chat window.</p>
+          </div>
+          <div>
+            <p class="lede">You can run it again.</p>
+          </div>
+        </div>
         <aside class="notes">Close the opening sequence by tying the proof back to the thesis.</aside>
       </section>
       <section class="content-slide">
-        <h2>So... you're interested, but you're not sure where to begin.</h2>
-        <p>That is normal. The next step is not mastery. It is noticing the problems that keep repeating.</p>
+        <h2>So... you&#x2019;re interested, but you&#x2019;re not sure where to begin.</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">Start simple.</p>
+          </div>
+          <div>
+            <p class="lede">Notice the problems that keep repeating.</p>
+          </div>
+        </div>
         <aside class="notes">Use this slide to shift from proof to adoption without changing the tools-first framing.</aside>
       </section>
       <section class="content-slide">
@@ -145,60 +302,96 @@
         <aside class="notes">Credit Artie Kuhn at Miami University here.</aside>
       </section>
       <section class="content-slide">
-        <h2>Start collecting friction</h2>
-        <ul>
-          <li>The task you keep postponing because it is tedious</li>
-          <li>The workflow that breaks every time the format changes</li>
-          <li>The thing only one person knows how to do</li>
-        </ul>
+        <h2>Back to the Sigh List</h2>
+        <div class="two-col">
+          <div>
+            <ul>
+              <li>The task you keep postponing because it is tedious</li>
+              <li>The workflow that breaks every time the format changes</li>
+              <li>The thing only one person knows how to do</li>
+            </ul>
+          </div>
+          <div>
+            <p class="lede">Keep the problem simple and concrete.</p>
+          </div>
+        </div>
         <aside class="notes">Frame the sigh list as a practical inventory of recurring friction, not a vague brainstorming exercise.</aside>
       </section>
       <section class="content-slide">
-        <h2>What types of problems?</h2>
-        <p>Campus use cases are everywhere once you start looking for repeated friction.</p>
-        <ul>
-          <li>exam questions uploaded into Canvas</li>
-          <li>chemical diagrams</li>
-          <li>learning objects</li>
-          <li>interlinear Bible</li>
-        </ul>
+        <h2>What belongs on the list?</h2>
+        <div class="two-col">
+          <div>
+            <p class="lede">Good candidates are recurring, concrete, and easy to recognize when they come back.</p>
+          </div>
+          <div>
+            <ul>
+              <li>exam questions uploaded into Canvas</li>
+              <li>chemical diagrams</li>
+              <li>learning objects</li>
+              <li>interlinear Bible</li>
+            </ul>
+          </div>
+        </div>
         <aside class="notes">These are examples of tool-worthy problems, not just chat prompts.</aside>
       </section>
       <section class="content-slide">
-        <h2>Pattern recognition</h2>
-        <p>If the same annoyance happens again and again, it may not be a personal productivity problem. It may be a missing tool.</p>
-        <aside class="notes">Name the shift explicitly: repeated friction is a signal that a tool may be worth building.</aside>
-      </section>
-      <section class="content-slide">
         <h2>Your turn</h2>
-        <p>What in your own work keeps recurring often enough that you can already predict the next time it will bother you?</p>
+        <div class="two-col">
+          <div>
+            <p class="lede">What in your own work keeps recurring often enough that you can already predict the next time it will bother you?</p>
+          </div>
+          <div>
+            <p class="lede">Bring that problem to the workshop.</p>
+          </div>
+        </div>
         <aside class="notes">Pause long enough for people to identify one real candidate from their own context.</aside>
       </section>
-      <section class="dark-slide">
+      <section class="dark-slide" style="text-align: center;">
         <h2>Dr. John Delano</h2>
-        <p>Here is someone on campus already doing this work.</p>
+        <p class="lede">Here is someone on campus already doing this work.</p>
         <aside class="notes">Short handoff, then stop talking.</aside>
       </section>
       <section class="content-slide">
         <h2>When you come back to your desk</h2>
-        <p>Do not start with a grand strategy. Start with one repeated pain point and describe the tool you wish already existed.</p>
+        <div class="two-col">
+          <div>
+            <p class="lede">Do not start with a grand strategy.</p>
+          </div>
+          <div>
+            <p class="lede">Start with one repeated pain point and describe the tool you wish already existed.</p>
+          </div>
+        </div>
         <aside class="notes">Re-entry matters because interest fades quickly unless the first step is concrete and small.</aside>
       </section>
       <section class="content-slide">
         <h2>Workshops</h2>
-        <p>bring your laptop. bring your sigh list. bring one real problem. We will turn a recurring problem into a concrete tool idea you can test.</p>
+        <div class="two-col">
+          <div>
+            <p class="lede">bring your laptop. bring your sigh list. bring one real problem.</p>
+          </div>
+          <div>
+            <p class="lede">We will turn a recurring problem into a concrete tool idea you can test.</p>
+          </div>
+        </div>
         <aside class="notes">Make the call to action concrete so the next step feels like participation, not inspiration.</aside>
       </section>
       <section class="content-slide">
         <h2>Keep moving toward tools</h2>
-        <p>Do not stop at asking for answers. Keep pushing toward repeatable systems that other people can run and reuse.</p>
+        <div class="two-col">
+          <div>
+            <p class="lede">Do not stop at asking for answers.</p>
+          </div>
+          <div>
+            <p class="lede">Keep pushing toward repeatable systems that other people can run and reuse.</p>
+          </div>
+        </div>
         <aside class="notes">Restate the central claim one last time so the closing arc lands on durable leverage.</aside>
       </section>
-      <section class="dark-slide">
-        <h2>Let&apos;s build something useful</h2>
-        <p>Micah Cooper</p>
-        <p>micahcooper@cedarville.edu</p>
-        <p>bring your laptop. bring your sigh list. bring one real problem.</p>
+      <section class="dark-slide" style="text-align: center;">
+        <h2>Let&#x2019;s build something useful</h2>
+        <p style="margin-bottom: 0.25rem;">Micah Cooper</p>
+        <p style="margin: 0.25rem 0;">micahcooper@cedarville.edu</p>
+        <p style="margin-top: 0.9rem;">bring your laptop. bring your sigh list. bring one real problem.</p>
         <aside class="notes">End on the invitation and contact line so the audience leaves with a specific next action.</aside>
       </section>
     </div>

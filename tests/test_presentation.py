@@ -1,3 +1,4 @@
+import html as html_lib
 from html.parser import HTMLParser
 from pathlib import Path
 import unittest
@@ -8,6 +9,18 @@ INDEX = ROOT / "index.html"
 
 def read_html():
     return INDEX.read_text(encoding="utf-8") if INDEX.exists() else ""
+
+
+def read_display_html():
+    return html_lib.unescape(read_html())
+
+
+PROMPT_TEXT = (
+    "This project will access our TeamDynamix Knowledge Base using APIs, improve the quality of the "
+    "articles, remove redundancy and defects, identify articles in need of attention, and push corrects "
+    "back into the live environment after appropriate levels of confirmation and reference re-writing. "
+    "Develop an approproach within the KCS framework."
+)
 
 
 class SlidesParser(HTMLParser):
@@ -79,9 +92,23 @@ class PresentationShellTests(unittest.TestCase):
         self.assertTrue(INDEX.exists(), "index.html should exist")
 
     def test_title_and_subtitle_copy_exist(self):
+        html = read_display_html()
+        self.assertIn("Codex: When you’re done Chatting about your problems", html)
+        self.assertIn("Let’s Build!", html)
+
+    def test_curly_apostrophes_are_used_in_copy(self):
         html = read_html()
-        self.assertIn("Codex: When you're done Chatting about your problems", html)
-        self.assertIn("Have Codex build solutions", html)
+        required_entities = [
+            "you&#x2019;re done Chatting",
+            "I&#x2019;ve heard",
+            "It&#x2019;s not better",
+            "you&#x2019;re not good",
+            "there&#x2019;s friction",
+            "you&#x2019;re interested",
+            "Let&#x2019;s build something useful",
+        ]
+        for phrase in required_entities:
+            self.assertIn(phrase, html)
 
     def test_reveal_assets_are_loaded(self):
         html = read_html()
@@ -107,16 +134,20 @@ class PresentationShellTests(unittest.TestCase):
         self.assertNotIn('url("assets/', html)
         self.assertNotIn("url(/", html)
 
-    def test_prompt_and_output_placeholders_exist(self):
+    def test_prompt_and_output_slides_exist(self):
         parser = parse_slides()
-        proof_slides = {
-            "Here is what I told Codex to write.": "Prompt screenshot placeholder",
-            "Here is what it gave me.": "Output screenshot placeholder",
-        }
-        for title, placeholder in proof_slides.items():
-            self.assertIn(title, parser.slide_titles)
-            slide_index = parser.slide_titles.index(title)
-            self.assertIn(placeholder, parser.slide_texts[slide_index])
+        self.assertIn("Here is what I told Codex to write.", parser.slide_titles)
+        prompt_slide_index = parser.slide_titles.index("Here is what I told Codex to write.")
+        self.assertIn(PROMPT_TEXT, parser.slide_texts[prompt_slide_index])
+        self.assertIn("Here is what it gave me.", parser.slide_titles)
+
+    def test_output_slide_text_is_removed(self):
+        html = read_display_html()
+        self.assertNotIn("Output screenshot placeholder", html)
+        self.assertNotIn("A working tool.", html)
+
+    def test_prompt_placeholder_is_removed(self):
+        self.assertNotIn("Prompt screenshot placeholder", read_html())
 
     def test_every_slide_has_speaker_notes(self):
         parser = parse_slides()
@@ -145,9 +176,50 @@ class PresentationShellTests(unittest.TestCase):
 
     def test_layout_utilities_exist(self):
         html = read_html()
+        self.assertIn(".content-slide", html)
         self.assertIn(".dark-slide", html)
         self.assertIn(".two-col", html)
-        self.assertIn(".callout-box", html)
+
+    def test_two_column_layout_is_used_broadly(self):
+        html = read_html()
+        self.assertGreaterEqual(html.count('class="two-col"'), 7)
+
+    def test_visual_boxes_are_removed(self):
+        html = read_html()
+        removed = [
+            ".callout-box",
+            ".highlight-box",
+            ".comparison-card",
+            ".prompt-frame",
+            ".example-chip",
+            ".signal-grid",
+            ".dark-panel",
+            'class="callout-box"',
+            'class="highlight-box"',
+            'class="comparison-card"',
+            'class="prompt-frame"',
+            'class="example-chip"',
+            'class="signal-grid"',
+            'class="dark-panel"',
+        ]
+        for phrase in removed:
+            self.assertNotIn(phrase, html)
+
+    def test_depth_effects_are_removed(self):
+        html = read_html()
+        self.assertNotIn("box-shadow:", html)
+        self.assertNotIn("radial-gradient(", html)
+
+    def test_dark_slides_use_solid_blue_background(self):
+        html = read_html()
+        self.assertIn(".dark-slide {", html)
+        self.assertIn("background: var(--cu-blue) !important;", html)
+        self.assertNotIn("linear-gradient(135deg, #002745 0%, #003963 55%, #155987 100%)", html)
+
+    def test_eyebrow_headers_are_removed_from_slides(self):
+        html = read_html()
+        self.assertNotIn('class="eyebrow"', html)
+        self.assertNotIn("text-transform: uppercase;", html)
 
     def test_bullet_lists_use_custom_marker_layout(self):
         html = read_html()
@@ -157,64 +229,156 @@ class PresentationShellTests(unittest.TestCase):
         self.assertIn('content: "•";', html)
 
     def test_core_hook_and_proof_copy_exist(self):
-        html = read_html()
+        html = read_display_html()
         required = [
-            "Stop using AI for what you're already good at.",
-            "Use it for what you're not good at.",
-            "I don't code. I don't want to code.",
+            "Biggest issue I’ve heard with ChatGPT:",
+            "It’s not better than I am at xyz",
+            "Try using it for what you’re not good at",
+            "Yeah, me either",
+            "anymore",
+            "Artie Kuhn, Emerging Technology in Business + Design Department at Miami University",
+            "there’s friction to eliminating it",
+            "Real world issues: Sugru",
+            "knowledge-work issues: Codex",
             "What tools could you have if you could describe what you wanted in plain English?",
             "Here is what I told Codex to write.",
             "Here is what it gave me.",
-            "an LLM answer is a one-time output",
+            "Runs once in a chat window.",
+            "Useful, but not a system.",
+            "Runs independently once it is created.",
             "repeatable on the next run",
+            "Auditable: inspect the logic, inputs, and results.",
         ]
         for phrase in required:
             self.assertIn(phrase, html)
+
+    def test_tool_vs_output_slide_uses_crisp_comparison_copy(self):
+        parser = parse_slides()
+        self.assertIn("Tool vs. output", parser.slide_titles)
+        slide_index = parser.slide_titles.index("Tool vs. output")
+        slide_text = parser.slide_texts[slide_index]
+        required = [
+            "LLM-generated output",
+            "Runs once in a chat window.",
+            "Useful, but not a system.",
+            "LLM-built tool",
+            "Runs independently once it is created.",
+            "repeatable on the next run",
+            "Auditable: inspect the logic, inputs, and results.",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, slide_text)
+        html = read_display_html()
+        self.assertIn('alt="Tool vs. output illustration"', html)
+
+    def test_friction_slide_uses_fragmented_parallel_examples(self):
+        parser = parse_slides()
+        self.assertIn("Friction is the signal", parser.slide_titles)
+        slide_index = parser.slide_titles.index("Friction is the signal")
+        slide_text = parser.slide_texts[slide_index]
+        self.assertIn("Real world issues: Sugru", slide_text)
+        self.assertIn("knowledge-work issues: Codex", slide_text)
+        html = read_display_html()
+        self.assertIn("class=\"fragment fade-in\"", html)
+        self.assertIn("Real world issues: Sugru", html)
+        self.assertIn("knowledge-work issues: Codex", html)
+
+    def test_objection_slide_uses_anymore_fragment(self):
+        parser = parse_slides()
+        self.assertIn("I don’t code. I don’t want to code.", parser.slide_titles)
+        slide_index = parser.slide_titles.index("I don’t code. I don’t want to code.")
+        slide_text = parser.slide_texts[slide_index]
+        self.assertIn("anymore", slide_text)
+        html = read_display_html()
+        self.assertIn('<span class="fragment fade-in">anymore</span>', html)
+        self.assertIn('alt="#vibecoding"', html)
+        self.assertIn("data:image/svg+xml", html)
+
+    def test_prompt_slide_uses_styled_blockquote(self):
+        html = read_display_html()
+        self.assertIn('<blockquote class="prompt-quote">', html)
+        self.assertIn(PROMPT_TEXT, html)
+
+    def test_sigh_list_follow_up_slides_are_tightened(self):
+        parser = parse_slides()
+        self.assertGreaterEqual(len(parser.slide_titles), 15)
+        self.assertEqual(parser.slide_titles[12], "Back to the Sigh List")
+        self.assertEqual(parser.slide_titles[13], "What belongs on the list?")
+        slide_text = parser.slide_texts[13]
+        required = [
+            "Good candidates are recurring, concrete, and easy to recognize when they come back.",
+            "exam questions uploaded into Canvas",
+            "chemical diagrams",
+            "learning objects",
+            "interlinear Bible",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, slide_text)
 
     def test_first_half_contains_multiple_notes_blocks(self):
         parser = parse_slides()
         self.assertGreaterEqual(len(parser.slide_has_notes), 11)
         self.assertTrue(all(parser.slide_has_notes[:11]))
 
-    def test_slide_count_is_exactly_twenty_two(self):
+    def test_language_abstraction_slide_is_removed(self):
         parser = parse_slides()
-        self.assertEqual(parser.top_level_slide_count, 22)
+        self.assertNotIn("Language is the abstraction", parser.slide_titles)
+        self.assertNotIn("A real constraint", parser.slide_titles)
+        self.assertNotIn(
+            "You do not need programmer fluency first if you can specify outcomes, constraints, and revisions in plain English.",
+            read_display_html(),
+        )
+        self.assertNotIn("Not answers. Not drafts. Tools that keep doing useful work after the chat ends.", read_display_html())
+
+    def test_slide_count_is_exactly_twenty(self):
+        parser = parse_slides()
+        self.assertEqual(parser.top_level_slide_count, 20)
 
     def test_raw_section_count_is_in_expected_range(self):
         html = read_html()
         slide_count = html.count("<section")
-        self.assertGreaterEqual(slide_count, 22)
-        self.assertLessEqual(slide_count, 24)
+        self.assertGreaterEqual(slide_count, 20)
+        self.assertLessEqual(slide_count, 22)
 
     def test_opening_sequence_matches_task_four_spec(self):
         parser = parse_slides()
-        self.assertGreaterEqual(len(parser.slide_titles), 4)
+        self.assertGreaterEqual(len(parser.slide_titles), 5)
         self.assertEqual(
-            parser.slide_titles[:4],
+            parser.slide_titles[:5],
             [
-                "Codex: When you're done Chatting about your problems",
-                "Stop using AI for what you're already good at.",
-                "Use it for what you're not good at.",
-                "I don't code. I don't want to code.",
+                "Codex: When you’re done Chatting about your problems",
+                "Biggest issue I’ve heard with ChatGPT:",
+                "Sigh List",
+                "Friction is the signal",
+                "I don’t code. I don’t want to code.",
             ],
         )
 
+    def test_opening_slide_uses_fragments(self):
+        html = read_display_html()
+        self.assertIn('class="fragment fade-in', html)
+        self.assertIn("It’s not better than I am at xyz", html)
+        self.assertIn("Try using it for what you’re not good at", html)
+
     def test_key_first_half_notes_exist(self):
-        html = read_html()
+        html = read_display_html()
         required_notes = [
             "Pause after this line and let the room react.",
-            "Replace this box with the real prompt artifact later.",
+            "Use the exact TeamDynamix prompt text here to show how concrete the request can be.",
             "Stress independence, repeatability, and auditability here.",
         ]
         for phrase in required_notes:
             self.assertIn(phrase, html)
 
     def test_adoption_and_closing_copy_exist(self):
-        html = read_html()
+        html = read_display_html()
         required = [
-            "So... you're interested, but you're not sure where to begin.",
-            "Sigh List",
+            "Back to the Sigh List",
             "What in your life or work makes you sigh",
+            "Real world issues: Sugru",
+            "knowledge-work issues: Codex",
+            "What belongs on the list?",
+            "Good candidates are recurring, concrete, and easy to recognize when they come back.",
             "exam questions uploaded into Canvas",
             "chemical diagrams",
             "learning objects",
@@ -229,8 +393,11 @@ class PresentationShellTests(unittest.TestCase):
         for phrase in required:
             self.assertIn(phrase, html)
 
+    def test_removed_sigh_phrase_is_not_present(self):
+        self.assertNotIn("If it makes you sigh, write it down before you explain it away.", read_display_html())
+
     def test_key_closing_notes_exist(self):
-        html = read_html()
+        html = read_display_html()
         required_notes = [
             "Credit Artie Kuhn at Miami University here.",
             "Short handoff, then stop talking.",
