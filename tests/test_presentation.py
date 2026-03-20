@@ -34,6 +34,10 @@ class PresentationShellTests(unittest.TestCase):
         html = read_html()
         self.assertIn("plugin/notes/notes.esm.js", html)
         self.assertIn("<aside class=\"notes\">", html)
+        self.assertIn("plugins: [RevealNotes]", html)
+        self.assertIn("hash: true", html)
+        self.assertIn("transition: 'fade'", html)
+        self.assertIn("transitionSpeed: 'fast'", html)
 
     def test_layout_utilities_exist(self):
         html = read_html()
