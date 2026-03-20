@@ -117,6 +117,12 @@ class PresentationShellTests(unittest.TestCase):
         parser = parse_slides()
         self.assertEqual(parser.top_level_slide_count, 22)
 
+    def test_raw_section_count_is_in_expected_range(self):
+        html = read_html()
+        slide_count = html.count("<section")
+        self.assertGreaterEqual(slide_count, 22)
+        self.assertLessEqual(slide_count, 24)
+
     def test_opening_sequence_matches_task_four_spec(self):
         parser = parse_slides()
         self.assertGreaterEqual(len(parser.slide_titles), 4)
