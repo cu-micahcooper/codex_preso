@@ -47,3 +47,32 @@ class PresentationShellTests(unittest.TestCase):
         self.assertIn(".dark-slide", html)
         self.assertIn(".two-col", html)
         self.assertIn(".callout-box", html)
+
+    def test_core_hook_and_proof_copy_exist(self):
+        html = read_html()
+        required = [
+            "Stop using AI for what you're already good at.",
+            "Use it for what you're not good at.",
+            "I don't code. I don't want to code.",
+            "What tools could you have if you could describe what you wanted in plain English?",
+            "Here is what I told Codex to write.",
+            "Here is what it gave me.",
+            "an LLM answer is a one-time output",
+            "repeatable on the next run",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, html)
+
+    def test_first_half_contains_multiple_notes_blocks(self):
+        html = read_html()
+        self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
+
+    def test_key_first_half_notes_exist(self):
+        html = read_html()
+        required_notes = [
+            "Pause after this line and let the room react.",
+            "Replace this box with the real prompt artifact later.",
+            "Stress independence, repeatability, and auditability here.",
+        ]
+        for phrase in required_notes:
+            self.assertIn(phrase, html)
