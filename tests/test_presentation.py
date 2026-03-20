@@ -27,6 +27,9 @@ class PresentationShellTests(unittest.TestCase):
         html = read_html()
         self.assertIn("--cu-blue: #003963;", html)
         self.assertIn("--cu-gold: #FBB93A;", html)
+        self.assertIn("--cu-orange: #F59536;", html)
+        self.assertIn("--cu-white: #FFFFFF;", html)
+        self.assertIn("--cu-gray: #E7E6E6;", html)
         self.assertIn("font-family: 'myriad-pro', sans-serif;", html)
         self.assertIn("font-family: 'minion-pro', serif;", html)
 
