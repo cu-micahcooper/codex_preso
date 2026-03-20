@@ -109,8 +109,8 @@ Target roughly 21 slides. Exact count can vary by one or two if pacing improves.
 ### 1. Title Slide
 
 - Purpose: establish topic and Cedarville context
-- Recommended title: `Codex: From AI Answers to Useful Tools`
-- Recommended subtitle: `A practical introduction for Cedarville faculty and staff`
+- Recommended title: `Codex: When you're done Chatting about your problems`
+- Recommended subtitle: `Have Codex build solutions`
 - Visual treatment: dark slide with Cedarville branding
 - Speaker notes: brief setup, name the room, and set expectation that this is practical rather than theoretical
 
