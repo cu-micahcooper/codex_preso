@@ -14,418 +14,560 @@
       --cu-white: #FFFFFF;
       --cu-gray: #E7E6E6;
     }
-
     .reveal {
       font-family: 'minion-pro', serif;
-      font-size: 34px;
+      font-size: 30px;
       color: #222;
-      background: #f5f1e8;
     }
-
-    .reveal .slides {
-      text-align: left;
-    }
-
-    .reveal h1,
-    .reveal h2,
-    .reveal h3 {
+    .reveal h1, .reveal h2, .reveal h3 {
       font-family: 'myriad-pro', sans-serif;
       font-weight: 600;
       color: var(--cu-blue);
-      letter-spacing: 0;
-      margin-bottom: 0.55rem;
+      text-transform: none;
+      letter-spacing: 0.01em;
     }
-
-    .reveal h1 {
-      font-size: 2.5em;
-      line-height: 0.92;
-    }
-
-    .reveal h2 {
-      font-size: 1.72em;
-      line-height: 0.96;
-      max-width: 11ch;
-    }
-
-    .reveal p {
-      line-height: 1.28;
-    }
-
-    .content-slide {
-      padding: 3.3rem 3.9rem !important;
-      background: #fcfaf4;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .content-slide::before {
-      content: "";
-      position: absolute;
-      top: 2rem;
-      left: 3.9rem;
-      width: 4.2rem;
-      height: 4px;
-      background: var(--cu-gold);
-      z-index: 0;
-    }
-
-    .content-slide > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .dark-slide {
-      background: var(--cu-blue) !important;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
+    .dark-slide { background: var(--cu-blue) !important; }
     .reveal .slides section.dark-slide h1,
     .reveal .slides section.dark-slide h2,
     .reveal .slides section.dark-slide h3,
     .reveal .slides section.dark-slide p,
-    .reveal .slides section.dark-slide li {
-      color: white;
+    .reveal .slides section.dark-slide li { color: white; }
+    .content-slide { padding: 40px 60px !important; box-sizing: border-box; overflow: hidden; }
+    .slide-logo {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      height: 44px;
+      z-index: 10;
     }
-
+    .highlight-box {
+      border-left: 4px solid var(--cu-gold);
+      background: var(--cu-gray);
+      padding: 0.6em 0.9em;
+      font-family: 'minion-pro', serif;
+      font-size: 0.85em;
+      border-radius: 2px;
+      text-align: left;
+    }
+    .callout-box {
+      background: var(--cu-blue);
+      color: white;
+      padding: 0.75em 1.1em;
+      font-style: italic;
+      font-family: 'minion-pro', serif;
+      font-size: 0.88em;
+      border-radius: 3px;
+    }
     .two-col {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: 2.2rem;
-      align-items: start;
-      margin-top: 1.25rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5em;
     }
-
-    .lede {
+    .big-number {
       font-family: 'myriad-pro', sans-serif;
-      font-size: 1.04em;
-      line-height: 1.22;
-      margin: 0 0 0.95rem;
-      max-width: 18ch;
-    }
-
-    .prompt-quote {
-      border-left: 6px solid var(--cu-gold);
+      font-size: 4em;
+      font-weight: 700;
+      line-height: 1;
       color: var(--cu-blue);
-      font-size: 0.88em;
-      line-height: 1.32;
-      margin: 1.4rem 0 0;
-      max-width: 33rem;
-      padding: 0.2rem 0 0.2rem 1.2rem;
     }
-
-    .prompt-quote p {
+    .reveal ul {
+      font-family: 'minion-pro', serif;
+      font-size: 0.88em;
+      line-height: 1.6;
+      margin-left: 10em;
+      text-align: left;
+    }
+    .reveal ul li { margin-bottom: 0.35em; }
+    .gold-label,
+    .reveal .slides section.dark-slide .gold-label {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 0.75em;
+      color: var(--cu-gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4em;
+    }
+    .sigh-prompt {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 1.4em;
+      font-weight: 600;
+      color: var(--cu-blue);
+      margin-bottom: 0.4em;
+    }
+    .objection-block {
+      background: var(--cu-gray);
+      border-radius: 4px;
+      padding: 0.6em 1em;
+      margin-bottom: 0.7em;
+    }
+    .objection-label {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 0.65em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cu-orange);
+      margin-bottom: 0.15em;
+    }
+    .objection-text {
+      font-family: 'minion-pro', serif;
+      font-size: 0.9em;
+      color: #222;
       margin: 0;
     }
-
-    .slide-art {
-      display: block;
-      margin: 1rem 0 0;
-      max-width: 24rem;
-      width: 100%;
+    .resolution-text {
+      font-family: 'minion-pro', serif;
+      font-size: 0.85em;
+      color: var(--cu-blue);
+      margin: 0.2em 0 0 0;
+      font-style: italic;
     }
-
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2rem;
-      margin-top: 1.25rem;
+    .versus-col {
+      background: var(--cu-gray);
+      border-radius: 6px;
+      padding: 1em;
     }
-
-    .comparison-grid > div {
-      border-top: 2px solid rgba(0, 57, 99, 0.16);
-      padding-top: 0.9rem;
+    .versus-col.dark-col {
+      background: var(--cu-blue);
     }
-
-    .comparison-grid h3 {
-      font-size: 0.9em;
-      line-height: 1.02;
-      margin-top: 0;
-      margin-bottom: 0.55rem;
-    }
-
-    .comparison-grid p {
+    .versus-col h3 {
       font-family: 'myriad-pro', sans-serif;
-      margin: 0 0 0.55rem;
-      max-width: 18ch;
+      font-size: 0.9em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5em;
     }
-
-    .reveal ul {
+    .versus-col.dark-col h3 { color: var(--cu-gold); }
+    .versus-col ul {
       list-style: none;
       margin: 0;
       padding: 0;
     }
-
-    .reveal ul li {
+    .versus-col li {
+      font-family: 'minion-pro', serif;
+      font-size: 0.8em;
+      padding: 0.25em 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .versus-col.dark-col li {
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .prompt-block {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7em;
+      text-align: left;
+      padding: 1em 1.2em;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      border-left: 3px solid var(--cu-gold);
+    }
+    .desk-step {
       display: flex;
       align-items: flex-start;
-      gap: 0.45em;
-      margin-bottom: 0.35em;
+      gap: 0.8em;
+      margin-bottom: 0.7em;
     }
-
-    .reveal ul li::before {
-      content: "•";
-      color: var(--cu-gold);
+    .step-num {
       font-family: 'myriad-pro', sans-serif;
+      font-size: 1.4em;
       font-weight: 700;
-      line-height: 1.1;
-      flex: 0 0 auto;
+      color: var(--cu-gold);
+      line-height: 1;
+      min-width: 1.2em;
     }
-
-    @media (max-width: 900px) {
-      .content-slide {
-        padding: 2.4rem 2rem !important;
-      }
-
-      .content-slide::before {
-        left: 2rem;
-      }
-
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
+    .step-text {
+      font-family: 'myriad-pro', sans-serif;
+      font-size: 0.85em;
+      color: #222;
+      padding-top: 0.15em;
     }
   </style>
 </head>
 <body>
-    <div class="reveal">
+  <div class="reveal">
     <div class="slides">
-      <section class="dark-slide" style="text-align: center;">
-        <h1>Codex: When you&#x2019;re done Chatting about your problems</h1>
-        <p class="lede" style="color: var(--cu-gold); margin-top: 1rem;">Let&#x2019;s build!</p>
-        <aside class="notes">Open by shifting the room from talking about problems to building tools that solve them.</aside>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 1 — TITLE
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <img src="assets/cu_whitegold_h.png" alt="Cedarville University"
+             style="height:64px; margin-bottom:1.6em;" />
+        <h1 style="font-size:2em; margin-bottom:0.3em; line-height:1.2;">
+          Codex:<br />
+          <span style="font-weight:400; font-size:0.75em; color:rgba(255,255,255,0.85);">
+            When you&#x2019;re done Chatting about your problems
+          </span>
+        </h1>
+        <p style="color:var(--cu-gold); font-family:'minion-pro',serif;
+                  font-size:0.8em; letter-spacing:0.06em; margin-top:0.6em;">
+          March 2026
+        </p>
+        <p style="margin-top:1.4em; font-family:'minion-pro',serif;
+                  font-size:0.65em; color:rgba(255,255,255,0.55);">
+          Nat Biggs &nbsp;·&nbsp; Micah Cooper &nbsp;·&nbsp; John Delano
+        </p>
+        <aside class="notes">
+          Open by shifting the room from talking about problems to building tools that solve them.
+          Nat leads opening prayer, then Micah takes the mic for the intro.
+        </aside>
       </section>
+
+      <!-- ═══════════════════════════════════════
+           SECTION DIVIDER — THE PROBLEM
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <p class="gold-label">Part One</p>
+        <h1 style="font-size:2em;">The Sigh List</h1>
+        <aside class="notes">
+          Transition into the audience engagement segment. Micah facilitates.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 2 — SIGH LIST
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>Sigh list</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Artie Kuhn, Emerging Technology in Business + Design Department at Miami University</p>
-          </div>
-          <div>
-            <p class="lede">What in your life or work makes you sigh?</p>
-          </div>
-        </div>
-        <aside class="notes">Some of you are thinking something right now. What are they?</aside>
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Your Sigh List</h2>
+        <p style="font-family:'minion-pro',serif; font-size:0.75em; color:#555; font-style:italic; margin-bottom:0.3em;">
+          (with credit to Artie Kuhn, Miami University)
+        </p>
+        <p style="font-family:'minion-pro',serif; font-size:0.95em; margin-bottom:1em;">
+          What makes you sigh — at home, at work?
+        </p>
+        <ul>
+          <li class="fragment">Tasks you do over and over that feel like they shouldn&#x2019;t take this long</li>
+          <li class="fragment">Things that keep landing back on your plate</li>
+          <li class="fragment">Problems you&#x2019;ve mentally shelved because the fix feels too complicated</li>
+        </ul>
+        <p class="fragment" style="font-family:'minion-pro',serif; font-size:0.75em; color:#555; margin-top:0.8em; font-style:italic;">
+          Put it on the list.
+        </p>
+        <aside class="notes">
+          Ask the room: "What's on your list right now?"
+          Some of you are thinking something right now. What are they?
+          Pause and take audience responses — wait for Nat to nod before moving on.
+        </aside>
       </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 3 — FRICTION IS THE CHALLENGE
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>Friction is the challenge</h2>
-        <div class="comparison-grid">
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Friction is the Challenge</h2>
+        <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:1.5em; margin-top:0.8em; align-items:center;">
           <div>
-            <p class="lede">If something keeps bringing pain, there&#x2019;s friction to eliminating it.</p>
+            <img src="https://web.tesa.com/en/files/images/202402/3/medium-11180601,11180601_padded1x1_18.webp"
+                 alt="Sugru moldable glue"
+                 style="width:100%; border-radius:8px; display:block;" />
           </div>
-          <div>
-            <h3 class="fragment fade-in">Real-world issues: Sugru</h3>
-            <p class="fragment fade-in">Use a practical tool to remove physical friction.</p>
-            <h3 class="fragment fade-in">Knowledge-work issues: Codex</h3>
-            <p class="fragment fade-in">Use a practical tool to remove digital friction.</p>
-          </div>
-        </div>
-        <aside class="notes">what is sugru. story of my light switch student</aside>
-      </section>
-      <section class="dark-slide">
-        <h2>Biggest issue I&#x2019;ve heard with ChatGPT:</h2>
-        <div class="two-col">
-          <div>
-            <p class="fragment fade-in" style="font-family: 'myriad-pro', sans-serif; font-size: 1em; line-height: 1.28;">It&#x2019;s not better than I am at xyz</p>
-          </div>
-          <div>
-            <p class="fragment fade-in" style="font-family: 'myriad-pro', sans-serif; font-size: 1em; line-height: 1.28; color: var(--cu-gold);">Try using it for what you&#x2019;re not good at</p>
+          <div class="fragment" style="min-width:0;">
+            <p style="font-family:'minion-pro',serif; font-size:0.82em; margin-bottom:0.5em;">
+              <strong>Meet Sugru.</strong> Moldable glue that fixes small physical annoyances —
+              loose cables, wobbly handles, awkward light switches.
+            </p>
+            <p style="font-family:'minion-pro',serif; font-size:0.8em; color:#555; margin-bottom:0.7em;">
+              Sixty of you could leave right now and already benefit from this session.
+            </p>
+            <div class="callout-box" style="color:white;">
+              Some forms of friction Sugru can&#x2019;t fix.
+            </div>
           </div>
         </div>
-        <aside class="notes">Pause after this line and let the room react.</aside>
+        <aside class="notes">
+          What is Sugru. Story of the light switch student — open a few, pass them around, describe what it does.
+          The point: reducing friction is the goal. Sugru handles the physical world. We're here for everything else.
+        </aside>
       </section>
+
+      <section class="dark-slide" style="text-align:center;">
+        <h1 style="font-size:1.8em;">What pain points in your <em>digital</em> world<br />are on the sigh list?</h1>
+        <p class="fragment fade-in" style="font-family:'minion-pro',serif; font-size:1em; color:var(--cu-gold); margin-top:0.6em;">
+          Let&#x2019;s fix one.
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 4 — BIGGEST ISSUE WITH CHATGPT
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>I don&#x2019;t code. I don&#x2019;t want to code.</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Yeah, me either ... <span class="fragment fade-in">anymore</span></p>
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Biggest Issue I&#x2019;ve Heard with ChatGPT:</h2>
+        <div style="margin-top:1em;">
+          <div class="objection-block fragment">
+            <p class="objection-label">Objection</p>
+            <p class="objection-text">&#x201C;Chat&#x2019;s not as good as me at [the thing I&#x2019;m really good at].&#x201D;</p>
+            <p class="resolution-text">&#x2192; Use it for stuff you&#x2019;re <em>not</em> good at — like coding.</p>
           </div>
-          <div>
-            <img
-              class="slide-art"
-              alt="#vibecoding"
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MjAgNTIwJz4KICA8cmVjdCB3aWR0aD0nNzIwJyBoZWlnaHQ9JzUyMCcgZmlsbD0nI2Y2ZjRlZicvPgogIDxyZWN0IHg9JzgyJyB5PSc4OCcgd2lkdGg9JzQzMCcgaGVpZ2h0PScyNTYnIHJ4PScyMCcgZmlsbD0nIzAwMzk2MycvPgogIDxjaXJjbGUgY3g9JzExOCcgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2Y1OTUzNicvPgogIDxjaXJjbGUgY3g9JzE0NicgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2ZiYjkzYScvPgogIDxjaXJjbGUgY3g9JzE3NCcgY3k9JzExOCcgcj0nOCcgZmlsbD0nI2U3ZTZlNicvPgogIDxyZWN0IHg9JzExNCcgeT0nMTU2JyB3aWR0aD0nMTM4JyBoZWlnaHQ9JzE4JyByeD0nOScgZmlsbD0nI2ZiYjkzYScvPgogIDxyZWN0IHg9JzExNCcgeT0nMTk0JyB3aWR0aD0nMjk2JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjknLz4KICA8cmVjdCB4PScxMTQnIHk9JzIyNCcgd2lkdGg9JzI1MicgaGVpZ2h0PScxNCcgcng9JzcnIGZpbGw9JyNmZmZmZmYnIGZpbGwtb3BhY2l0eT0nMC43Jy8+CiAgPHJlY3QgeD0nMTE0JyB5PScyNTQnIHdpZHRoPSczMTgnIGhlaWdodD0nMTQnIHJ4PSc3JyBmaWxsPScjZmZmZmZmJyBmaWxsLW9wYWNpdHk9JzAuODInLz4KICA8cmVjdCB4PScxMTQnIHk9JzI4NCcgd2lkdGg9JzIwNicgaGVpZ2h0PScxNCcgcng9JzcnIGZpbGw9JyNmZmZmZmYnIGZpbGwtb3BhY2l0eT0nMC41OCcvPgogIDxwYXRoIGQ9J001NCAzOTJoNDkybDQ0IDM0SDEweicgZmlsbD0nIzAwMzk2MycvPgogIDxyZWN0IHg9JzQ3MicgeT0nMTI4JyB3aWR0aD0nMTg2JyBoZWlnaHQ9JzE4Nicgcng9JzMwJyBmaWxsPScjZjU5NTM2Jy8+CiAgPHRleHQgeD0nNTY1JyB5PScxOTQnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPSczNCcgZm9udC13ZWlnaHQ9JzcwMCcgZmlsbD0nI2ZmZmZmZic+I3ZpYmU8L3RleHQ+CiAgPHRleHQgeD0nNTY1JyB5PScyMzYnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPSczNCcgZm9udC13ZWlnaHQ9JzcwMCcgZmlsbD0nI2ZmZmZmZic+Y29kaW5nPC90ZXh0PgogIDxwYXRoIGQ9J001MTQgMjY4aDEwMycgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KICA8cGF0aCBkPSdNNTMwIDI5Mmg3Micgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzEwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9zdmc+Cg=="
-            />
+          <div class="objection-block fragment">
+            <p class="objection-label">Objection</p>
+            <p class="objection-text">&#x201C;It hallucinated once and I don&#x2019;t trust it.&#x201D;</p>
+            <p class="resolution-text">&#x2192; Tools built with Codex can be verified, iterated, and re-run.</p>
           </div>
         </div>
-        <aside class="notes">Voice the resistance plainly before reframing it.</aside>
+        <aside class="notes">
+          Pause after the first objection and let the room react.
+          The goal is not to replace expertise — it's to remove friction from everything else.
+        </aside>
       </section>
-      <section class="dark-slide" style="text-align: center;">
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 5 — I DON'T CODE
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h1 style="font-size:2em; margin-bottom:0.5em; line-height:1.25;">
+          &#x201C;I don&#x2019;t code.<br />I don&#x2019;t want to code.&#x201D;
+        </h1>
+        <p class="fragment fade-in" style="font-family:'minion-pro',serif; font-size:1em;
+                  color:var(--cu-gold); margin-top:0.4em;">
+          Neither do we.
+        </p>
+        <aside class="notes">
+          Voice the resistance plainly before reframing it.
+          Let the sentence land. Then deliver the reframe simply — we're not asking you to become developers.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SECTION DIVIDER — SEE IT IN ACTION
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <p class="gold-label">Part Two</p>
+        <h1 style="font-size:2em;">Stop Sighing</h1>
+        <aside class="notes">Nat kicks off the demo segment.</aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 6 — DR. JOHN DELANO
+      ═══════════════════════════════════════ -->
+      <section class="content-slide">
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
         <h2>Dr. John Delano</h2>
-        <p class="lede">Custom learning modules for the impatient</p>
-        <aside class="notes">Short handoff, then stop talking.</aside>
+        <p style="font-family:'minion-pro',serif; font-size:0.9em; margin-bottom:0.8em;">
+          Used Codex to build interactive <strong>HTML Learning Modules</strong>
+          — without writing a line of code himself.
+        </p>
+<aside class="notes">
+          Short handoff, then stop talking. Let John show the work.
+          Don't over-introduce — the demo speaks for itself.
+        </aside>
       </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 7 — HERE IS WHAT I TOLD CODEX
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
         <h2>Here is what I told Codex to write.</h2>
-        <blockquote class="prompt-quote">
-          <p>Create a web app that lets me search a database of organic molecules and interact with 3D models of them</p>
-        </blockquote>
-        <aside class="notes">Use the exact prompt text here to show how concrete the request can be.</aside>
+        <div class="prompt-block" style="margin-top:0.8em;">Create a web app that lets me search a database
+of organic molecules and interact with 3D models of them.</div>
+        <p style="font-family:'minion-pro',serif; font-size:0.72em; color:#555; margin-top:0.8em; font-style:italic;">
+          Look Ma, no code!
+        </p>
+        <aside class="notes">
+          Use the exact prompt text here to show how concrete the request can be.
+          This is the whole prompt — nothing else was needed to start.
+        </aside>
       </section>
+
+
+      <!-- ═══════════════════════════════════════
+           OTHER DEMOS
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>Here is what it gave me.</h2>
-        <aside class="notes">Keep the proof concrete and visible instead of abstract.</aside>
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Other Demos</h2>
+        <ul>
+          <li class="fragment">Micah reads the Bible</li>
+          <li class="fragment">Nat flexes AI for his kids</li>
+          <li class="fragment">Climb a treemap</li>
+        </ul>
       </section>
-      <section class="content-slide">
-        <h2>Chat vs Codex</h2>
-        <div class="comparison-grid">
-          <div>
-            <h3>LLM-generated output</h3>
-            <p>Runs once in a chat window.</p>
-            <p>Quick and easy</p>
-            <p>Useful, but not a system.</p>
-            <p>Sometimes hallcinates</p>
-          </div>
-          <div>
-            <h3>LLM-built tool</h3>
-            <p>Has access to local tools and data</p>
-            <p>iterates through the hacclinations</p>
-            <p>Runs independently once it is created.</p>
-            <p>Repeatable on the next run.</p>
-            <p>Auditable: inspect the logic, inputs, and results.</p>
-            <img
-              class="slide-art"
-              alt="Tool vs. output illustration"
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MjAgNTIwJz4KICA8cmVjdCB3aWR0aD0nNzIwJyBoZWlnaHQ9JzUyMCcgZmlsbD0nI2Y2ZjRlZicvPgogIDxyZWN0IHg9JzY0JyB5PScxMTQnIHdpZHRoPScyNTAnIGhlaWdodD0nMTgwJyByeD0nMjgnIGZpbGw9JyNmZmZmZmYnIHN0cm9rZT0nIzAwMzk2Mycgc3Ryb2tlLXdpZHRoPSc4Jy8+CiAgPHBhdGggZD0nTTEyMiAxOTBoMTMwJyBzdHJva2U9JyMwMDM5NjMnIHN0cm9rZS13aWR0aD0nMTYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgogIDxwYXRoIGQ9J00xMjIgMjI4aDkyJyBzdHJva2U9JyNmNTk1MzYnIHN0cm9rZS13aWR0aD0nMTYnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgogIDxjaXJjbGUgY3g9JzEwNCcgY3k9JzE5MCcgcj0nMTAnIGZpbGw9JyNmYmI5M2EnLz4KICA8Y2lyY2xlIGN4PScxMDQnIGN5PScyMjgnIHI9JzEwJyBmaWxsPScjZjU5NTM2Jy8+CiAgPHBhdGggZD0nTTM1NCAyMDZoODQnIHN0cm9rZT0nI2Y1OTUzNicgc3Ryb2tlLXdpZHRoPScxMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CiAgPHBhdGggZD0nTTQwNiAxNzJsMzggMzQtMzggMzQnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2Y1OTUzNicgc3Ryb2tlLXdpZHRoPScxMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+CiAgPHJlY3QgeD0nNDU0JyB5PSc4OCcgd2lkdGg9JzIwMicgaGVpZ2h0PScyNTAnIHJ4PScyOCcgZmlsbD0nIzAwMzk2MycvPgogIDxyZWN0IHg9JzQ5MCcgeT0nMTM4JyB3aWR0aD0nMTMwJyBoZWlnaHQ9JzE4JyByeD0nOScgZmlsbD0nI2ZiYjkzYScvPgogIDxyZWN0IHg9JzQ5MCcgeT0nMTgyJyB3aWR0aD0nMTE4JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjknLz4KICA8cmVjdCB4PSc0OTAnIHk9JzIxNCcgd2lkdGg9Jzk2JyBoZWlnaHQ9JzE0JyByeD0nNycgZmlsbD0nI2ZmZmZmZicgZmlsbC1vcGFjaXR5PScwLjc1Jy8+CiAgPHJlY3QgeD0nNDkwJyB5PScyNDYnIHdpZHRoPScxMzYnIGhlaWdodD0nMTQnIHJ4PSc3JyBmaWxsPScjZmZmZmZmJyBmaWxsLW9wYWNpdHk9JzAuODUnLz4KICA8cGF0aCBkPSdNNTEwIDMwMmwxOCAxOCA0Mi00NicgZmlsbD0nbm9uZScgc3Ryb2tlPScjZmJiOTNhJyBzdHJva2Utd2lkdGg9JzE0JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnLz4KICA8dGV4dCB4PScxODknIHk9JzM0NCcgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzI4JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMDAzOTYzJz5jaGF0IG91dHB1dDwvdGV4dD4KICA8dGV4dCB4PSc1NTYnIHk9JzM4NCcgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzI4JyBmb250LXdlaWdodD0nNzAwJyBmaWxsPScjMDAzOTYzJz5yZXBlYXRhYmxlIHRvb2w8L3RleHQ+Cjwvc3ZnPgo="
-            />
-          </div>
-        </div>
-        <aside class="notes">Stress independence, repeatability, and auditability here.</aside>
+
+      <!-- ═══════════════════════════════════════
+           SECTION DIVIDER — CHAT VS CODEX
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <p class="gold-label">Part Three</p>
+        <h1 style="font-size:2em;">Chat vs. Codex</h1>
+        <aside class="notes">Transition into the comparison.</aside>
       </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 9 — CHAT VS CODEX
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>Why this matters</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">A tool survives the chat window.</p>
-          </div>
-          <div>
-            <p class="lede">You can run it again.</p>
-          </div>
-        </div>
-        <aside class="notes">Close the opening sequence by tying the proof back to the thesis.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>So... you&#x2019;re interested, but you&#x2019;re not sure where to begin.</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Start simple.</p>
-          </div>
-          <div>
-            <p class="lede">Notice the problems that keep repeating.</p>
-          </div>
-        </div>
-        <aside class="notes">Use this slide to shift from proof to adoption without changing the tools-first framing.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Sigh list</h2>
-        <p>What in your life or work makes you sigh?</p>
-        <aside class="notes">Credit Artie Kuhn at Miami University here.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Back to the sigh list</h2>
-        <div class="two-col">
-          <div>
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Chat vs. Codex</h2>
+        <div class="two-col" style="margin-top:0.9em; align-items:start;">
+          <div class="versus-col fragment">
+            <h3 style="color:var(--cu-blue);">ChatGPT / Chat</h3>
             <ul>
-              <li>The task you keep postponing because it is tedious</li>
-              <li>The workflow that breaks every time the format changes</li>
-              <li>The thing only one person knows how to do</li>
+              <li>Answers a question</li>
+              <li>Output lives in a conversation</li>
+              <li>Runs once — results may vary</li>
+              <li>Can&#x2019;t touch your local files or data</li>
+              <li>You review &amp; apply the suggestion yourself</li>
             </ul>
           </div>
-          <div>
-            <p class="lede">Keep the problem simple and concrete.</p>
-          </div>
-        </div>
-        <aside class="notes">Frame the sigh list as a practical inventory of recurring friction, not a vague brainstorming exercise.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>What belongs on the list?</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Good candidates are recurring, concrete, and easy to recognize when they come back.</p>
-          </div>
-          <div>
+          <div class="versus-col dark-col fragment">
+            <h3>Codex</h3>
             <ul>
-              <li>exam questions uploaded into Canvas</li>
-              <li>chemical diagrams</li>
-              <li>learning objects</li>
-              <li>interlinear Bible</li>
+              <li>Builds a working tool</li>
+              <li>Output is a file you keep and share</li>
+              <li>Repeatable — run generated tool anytime</li>
+              <li>Access to local tools, files, APIs</li>
+              <li>Iterates through hallucinations automatically</li>
             </ul>
           </div>
         </div>
-        <aside class="notes">These are examples of tool-worthy problems, not just chat prompts.</aside>
+        <aside class="notes">
+          Stress independence, repeatability, and auditability here.
+          The key shift: from getting advice to building leverage.
+        </aside>
       </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 10 — WHY THIS MATTERS
+      ═══════════════════════════════════════ -->
       <section class="content-slide">
-        <h2>Your turn</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">What in your own work keeps recurring often enough that you can already predict the next time it will bother you?</p>
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Why This Matters</h2>
+        <div style="margin-top:0.8em;">
+          <div class="callout-box fragment" style="margin-bottom:1em; color:var(--cu-gold);">
+            Chat gives you an answer.<br />
+            Codex gives you a tool that keeps working after you close the tab.
           </div>
-          <div>
-            <p class="lede">Bring that problem to the workshop.</p>
+          <ul class="fragment">
+            <li class="fragment">The work product is <strong>durable</strong> — not locked inside a chat window</li>
+            <li class="fragment">You can hand it to a colleague, a student, or a future version of yourself</li>
+            <li class="fragment">Each tool you build removes a piece of friction — permanently</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          Close the opening sequence by tying the proof back to the thesis.
+          This is the "so what" moment — make it land before moving to adoption.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SECTION DIVIDER — NOW WHAT
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <p class="gold-label">Part Four</p>
+        <h1 style="font-size:2em;">Now What?</h1>
+        <aside class="notes">Shift from proof to adoption.</aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 11 — INTERESTED BUT NOT SURE
+      ═══════════════════════════════════════ -->
+      <section class="content-slide">
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>So&#x2026; you&#x2019;re interested,<br />but you&#x2019;re not sure where to begin.</h2>
+        <p style="font-family:'minion-pro',serif; font-size:0.9em; margin-top:0.8em; color:#444;">
+          You already know where to start — you made a list.
+        </p>
+        <aside class="notes">
+          Use this slide to shift from proof to adoption without changing the tools-first framing.
+          Don't let the energy drop here — bridge directly into the sigh list exercise.
+        </aside>
+      </section>
+
+
+
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 15 — YOUR TURN
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <img src="assets/cu_whitegold_h.png" alt="Cedarville University"
+             style="height:48px; margin-bottom:1.4em;" />
+        <h1 style="font-size:1.8em; margin-bottom:0.5em;">Live Demo Result 🤞</h1>
+        <aside class="notes">
+          Pause long enough for people to actually write something.
+          Don't rush this — let the silence work.
+          One real candidate from their own context, not a hypothetical.
+        </aside>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════
+           SLIDE 17 — WORKSHOPS
+      ═══════════════════════════════════════ -->
+      <section class="content-slide">
+        <img class="slide-logo" src="assets/logo.png" alt="Cedarville University" />
+        <h2>Next Step: Attend the Workshop</h2>
+        <p style="font-family:'minion-pro',serif; font-size:0.9em; margin-bottom:0.7em; text-align:center;">
+          Tuesday, March 31 &nbsp;·&nbsp; 10 a.m. &nbsp;·&nbsp; Tyler 101
+        </p>
+        <div style="text-align:center;">
+          <div style="display:inline-block; text-align:left;">
+            <p style="font-family:'minion-pro',serif; font-size:0.85em; margin-bottom:0.3em;">Bring:</p>
+            <ul style="margin-left:1.5em;">
+              <li class="fragment">Your laptop</li>
+              <li class="fragment">Your sigh list</li>
+              <li class="fragment">Your Sugru success story</li>
+            </ul>
           </div>
         </div>
-        <aside class="notes">Pause long enough for people to identify one real candidate from their own context.</aside>
+        <aside class="notes">
+          Make the call to action concrete so the next step feels like participation, not inspiration.
+          Have the sign-up link or QR code ready before this slide appears.
+        </aside>
       </section>
-      <section class="content-slide">
-        <h2>When you come back to your desk</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Do not start with a grand strategy.</p>
-          </div>
-          <div>
-            <p class="lede">Start with one repeated pain point and describe the tool you wish already existed.</p>
-          </div>
-        </div>
-        <aside class="notes">Re-entry matters because interest fades quickly unless the first step is concrete and small.</aside>
+
+
+
+      <!-- ═══════════════════════════════════════
+           CLOSING SLIDE
+      ═══════════════════════════════════════ -->
+      <section class="dark-slide" style="text-align:center;">
+        <img src="assets/cu_whitegold_h.png" alt="Cedarville University"
+             style="height:60px; margin-bottom:1.4em;" />
+        <h1 style="font-size:2em; margin-bottom:0.4em;">Thank You</h1>
+        <p style="color:var(--cu-gold); font-family:'minion-pro',serif; font-size:0.9em;">
+          Questions?
+        </p>
+        <p style="margin-top:1.6em; font-family:'minion-pro',serif;
+                  font-size:0.7em; color:rgba(255,255,255,0.55);">
+          Nat Biggs &nbsp;·&nbsp; Micah Cooper &nbsp;·&nbsp; John Delano &nbsp;·&nbsp; March 2026
+        </p>
       </section>
-      <section class="content-slide">
-        <h2>Workshops</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Bring your laptop. Bring your sigh list. Bring one real problem.</p>
-          </div>
-          <div>
-            <p class="lede">We will turn a recurring problem into a concrete tool idea you can test.</p>
-          </div>
-        </div>
-        <aside class="notes">Make the call to action concrete so the next step feels like participation, not inspiration.</aside>
-      </section>
-      <section class="content-slide">
-        <h2>Keep moving toward tools</h2>
-        <div class="two-col">
-          <div>
-            <p class="lede">Do not stop at asking for answers.</p>
-          </div>
-          <div>
-            <p class="lede">Keep pushing toward repeatable systems that other people can run and reuse.</p>
-          </div>
-        </div>
-        <aside class="notes">Restate the central claim one last time so the closing arc lands on durable leverage.</aside>
-      </section>
-      <section class="dark-slide" style="text-align: center;">
-        <h2>Let&#x2019;s build something useful</h2>
-        <p style="margin-bottom: 0.25rem;">Micah Cooper</p>
-        <p style="margin: 0.25rem 0;">micahcooper@cedarville.edu</p>
-        <p style="margin-top: 0.9rem;">Bring your laptop. Bring your sigh list. Bring one real problem.</p>
-        <aside class="notes">End on the invitation and contact line so the audience leaves with a specific next action.</aside>
-      </section>
+
     </div>
   </div>
+
   <script type="module">
     import Reveal from 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.esm.js';
     import RevealNotes from 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.esm.js';
-
     Reveal.initialize({
-      plugins: [RevealNotes],
+      plugins: [ RevealNotes ],
       hash: true,
       transition: 'fade',
-      transitionSpeed: 'fast'
+      transitionSpeed: 'fast',
+      controls: true,
+      progress: true,
+      slideNumber: false,
+      center: true,
+      width: '100%',
+      height: '100%',
+      margin: 0,
+      minScale: 1,
+      maxScale: 1,
     });
+    function syncBackground() {
+      const slide = Reveal.getCurrentSlide();
+      const isDark = slide && slide.classList.contains('dark-slide');
+      document.body.style.background = isDark ? '#003963' : '#ffffff';
+    }
+    Reveal.on('slidechanged', syncBackground);
+    Reveal.on('ready', syncBackground);
   </script>
 </body>
 </html>
