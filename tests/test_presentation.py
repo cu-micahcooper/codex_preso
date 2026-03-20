@@ -113,11 +113,9 @@ class PresentationShellTests(unittest.TestCase):
         html = read_html()
         self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
 
-    def test_slide_count_is_in_expected_range(self):
-        html = read_html()
-        slide_count = html.count("<section")
-        self.assertGreaterEqual(slide_count, 22)
-        self.assertLessEqual(slide_count, 24)
+    def test_slide_count_is_exactly_twenty_two(self):
+        parser = parse_slides()
+        self.assertEqual(parser.top_level_slide_count, 22)
 
     def test_opening_sequence_matches_task_four_spec(self):
         parser = parse_slides()
@@ -155,6 +153,8 @@ class PresentationShellTests(unittest.TestCase):
             "Dr. John Delano",
             "bring your laptop",
             "bring your sigh list",
+            "bring one real problem",
+            "Micah Cooper",
             "micahcooper@cedarville.edu",
         ]
         for phrase in required:
