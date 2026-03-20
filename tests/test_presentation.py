@@ -113,9 +113,11 @@ class PresentationShellTests(unittest.TestCase):
         html = read_html()
         self.assertGreaterEqual(html.count('<aside class="notes">'), 11)
 
-    def test_task_four_contains_exactly_eleven_top_level_slides(self):
-        parser = parse_slides()
-        self.assertEqual(parser.top_level_slide_count, 11)
+    def test_slide_count_is_in_expected_range(self):
+        html = read_html()
+        slide_count = html.count("<section")
+        self.assertGreaterEqual(slide_count, 22)
+        self.assertLessEqual(slide_count, 24)
 
     def test_opening_sequence_matches_task_four_spec(self):
         parser = parse_slides()
@@ -136,6 +138,34 @@ class PresentationShellTests(unittest.TestCase):
             "Pause after this line and let the room react.",
             "Replace this box with the real prompt artifact later.",
             "Stress independence, repeatability, and auditability here.",
+        ]
+        for phrase in required_notes:
+            self.assertIn(phrase, html)
+
+    def test_adoption_and_closing_copy_exist(self):
+        html = read_html()
+        required = [
+            "So... you're interested, but you're not sure where to begin.",
+            "Sigh List",
+            "What in your life or work makes you sigh?",
+            "exam questions uploaded into Canvas",
+            "chemical diagrams",
+            "learning objects",
+            "interlinear Bible",
+            "Dr. John Delano",
+            "bring your laptop",
+            "bring your sigh list",
+            "micahcooper@cedarville.edu",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, html)
+
+    def test_key_closing_notes_exist(self):
+        html = read_html()
+        required_notes = [
+            "Credit Artie Kuhn at Miami University here.",
+            "Short handoff, then stop talking.",
+            "These are examples of tool-worthy problems, not just chat prompts.",
         ]
         for phrase in required_notes:
             self.assertIn(phrase, html)
