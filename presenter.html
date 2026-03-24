@@ -580,6 +580,7 @@ of organic molecules and interact with 3D models of them.</div>
     const MultiplexClient = {
       id: 'multiplex',
       init(deck) {
+        if (window !== window.top) return; // don't broadcast from notes iframe
         const { secret, id: socketId, url } = deck.getConfig().multiplex;
         const socket = io(url);
         if (secret) {
